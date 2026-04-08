@@ -1,0 +1,21 @@
+
+> payroll@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.210.154:3000
+- Environments: .env.local
+✓ Ready in 856ms
+Creating turbopack project { dir: 'D:\\Working\\Project\\payroll', testMode: true }
+
+ GET /employees 200 in 474ms (next.js: 229ms, application-code: 245ms)
+✓ Compiled in 351ms
+ GET /employees 200 in 352ms (next.js: 147ms, application-code: 205ms)
+ GET / 200 in 273ms (next.js: 189ms, application-code: 83ms)
+ GET /employees 200 in 34ms (next.js: 6ms, application-code: 28ms)
+ GET / 200 in 29ms (next.js: 5ms, application-code: 24ms)
+ GET /employees 200 in 30ms (next.js: 4ms, application-code: 26ms)
+ GET / 200 in 22ms (next.js: 5ms, application-code: 17ms)
+ GET /employees 200 in 22ms (next.js: 4ms, application-code: 18ms)
+✓ Compiled in 281ms

@@ -17,7 +17,10 @@ interface EmployeeFormProps {
 }
 
 const inputClassName =
-  'w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500';
+  'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200';
+
+const selectClassName =
+  'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 pr-10 text-[16px] leading-none text-gray-900 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200';
 
 export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps) {
   const [loading, setLoading] = useState(false);
@@ -43,24 +46,18 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const trimmedName = formData.name.trim();
-    const trimmedPosition = formData.position?.trim() ?? '';
-
-    if (!trimmedName || formData.salary <= 0) {
-      toast.error('Vui lòng nhập đầy đủ thông tin bắt buộc');
-      return;
-    }
-
-    const payload: Employee = {
-      ...formData,
-      name: trimmedName,
-      position: trimmedPosition,
-    };
-
     setLoading(true);
 
     try {
+      const trimmedName = formData.name.trim();
+      if (!trimmedName) throw new Error("Vui lòng nhập tên nhân viên");
+      if (formData.salary <= 0) throw new Error("Lương cơ bản phải lớn hơn 0");
+
+      const payload: Employee = {
+        ...formData,
+        name: trimmedName,
+      };
+
       if (employee?.id) {
         await updateEmployee(employee.id, payload);
         toast.success('Cập nhật nhân viên thành công');
@@ -72,7 +69,7 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
 
       onSuccess?.();
     } catch (error) {
-      toast.error('Có lỗi xảy ra. Vui lòng thử lại');
+      toast.error(error instanceof Error ? error.message : 'Có lỗi xảy ra. Vui lòng thử lại');
       console.error(error);
     } finally {
       setLoading(false);
@@ -82,7 +79,7 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="employee-name" className="mb-1 block text-sm font-medium text-gray-700">
+        <label htmlFor="employee-name" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
           Tên nhân viên *
         </label>
         <input
@@ -92,26 +89,13 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
           value={formData.name}
           onChange={handleChange}
           className={inputClassName}
+          placeholder="Nhập tên nhân viên"
           required
         />
       </div>
 
       <div>
-        <label htmlFor="employee-position" className="mb-1 block text-sm font-medium text-gray-700">
-          Chức vụ
-        </label>
-        <input
-          id="employee-position"
-          type="text"
-          name="position"
-          value={formData.position}
-          onChange={handleChange}
-          className={inputClassName}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="employee-salary" className="mb-1 block text-sm font-medium text-gray-700">
+        <label htmlFor="employee-salary" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
           Lương cơ bản (VND) *
         </label>
         <input
@@ -122,12 +106,13 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
           value={formatNumberInput(formData.salary)}
           onChange={handleChange}
           className={inputClassName}
+          placeholder="Ví dụ: 8.500.000"
           required
         />
       </div>
 
       <div>
-        <label htmlFor="employee-food-allowance" className="mb-1 block text-sm font-medium text-gray-700">
+        <label htmlFor="employee-food-allowance" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
           Phụ cấp ăn (VND)
         </label>
         <input
@@ -138,49 +123,95 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
           value={formatNumberInput(formData.foodAllowance)}
           onChange={handleChange}
           className={inputClassName}
+          placeholder="Ví dụ: 500.000"
         />
       </div>
 
       <div>
-        <label htmlFor="employee-join-date" className="mb-1 block text-sm font-medium text-gray-700">
+        <label htmlFor="employee-join-date" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
           Ngày làm việc
         </label>
-        <input
-          id="employee-join-date"
-          type="date"
-          name="joinDate"
-          value={formData.joinDate}
-          onChange={handleChange}
-          className={inputClassName}
-        />
+        <div className="relative">
+          <input
+            id="employee-join-date"
+            type="date"
+            name="joinDate"
+            value={formData.joinDate}
+            onChange={handleChange}
+            className={`${inputClassName} !pr-10 [&::-webkit-calendar-picker-indicator]:hidden`}
+          />
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <svg
+              className="h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
 
       <div>
-        <label htmlFor="employee-factory" className="mb-1 block text-sm font-medium text-gray-700">
+        <label htmlFor="employee-factory" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
           Xưởng
         </label>
-        <select
-          id="employee-factory"
-          name="factory"
-          value={formData.factory}
-          onChange={handleChange}
-          className={inputClassName}
-        >
-          {FACTORIES.map((factory) => (
-            <option key={factory} value={factory}>
-              {factory}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            id="employee-factory"
+            name="factory"
+            value={formData.factory}
+            onChange={handleChange}
+            className={`${selectClassName} appearance-none pr-10`}
+          >
+            {FACTORIES.map((factory) => (
+              <option key={factory} value={factory}>
+                {factory}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <svg
+              className="h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
       </div>
 
-      <div className="flex gap-3 pt-2">
+      <div className="flex gap-3 pt-4">
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-blue-600 px-6 py-2 font-medium text-white hover:bg-blue-700 disabled:bg-gray-400"
+          className="w-full rounded-xl bg-primary px-6 py-3 font-bold text-white hover:bg-primary-hover disabled:bg-gray-300 transition-all duration-300 premium-shadow group flex items-center justify-center gap-2 cursor-pointer"
         >
-          {loading ? 'Đang xử lý...' : employee ? 'Cập nhật' : 'Thêm mới'}
+          {loading ? (
+            <svg className="h-5 w-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+          ) : employee ? (
+            'Cập nhật thông tin'
+          ) : (
+            <>
+              Thêm nhân viên
+              <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </>
+          )}
         </button>
       </div>
     </form>

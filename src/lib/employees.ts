@@ -40,5 +40,11 @@ export const parseFormattedNumber = (value: string) =>
 
 export const formatCurrency = (value: number) => `${value.toLocaleString('vi-VN')} đ`;
 
+const vietnameseDateFormatter = new Intl.DateTimeFormat('vi-VN', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+});
+
 export const formatDate = (value?: string) =>
-  value ? new Date(value).toLocaleDateString('vi-VN') : '';
+  value ? vietnameseDateFormatter.format(new Date(value)) : '';

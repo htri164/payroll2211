@@ -45,3 +45,8 @@ next-env.d.ts
 
 # local service accounts
 *-firebase-adminsdk-*.json
+
+# agent
+.agent/
+.pen/
+/design-system/

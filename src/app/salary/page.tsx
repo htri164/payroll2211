@@ -14,18 +14,29 @@ export default function SalaryPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Tính Lương</h1>
+    <main className="min-h-screen bg-background p-4 lg:p-10">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-10">
+          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+            Tính Toán <span className="text-success">Lương Thưởng</span>
+          </h1>
+          <p className="mt-2 text-gray-500">Thiết lập các khoản phụ phí, thưởng và khấu trừ để tạo bảng lương hàng tháng.</p>
+        </header>
 
-        <div className="grid gap-8">
-          <section className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Nhập thông tin tính lương</h2>
+        <div className="grid grid-cols-1 gap-12">
+          <section className="bg-white rounded-3xl border border-gray-100 shadow-premium p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
+              <span className="w-2 h-7 bg-success rounded-full"></span>
+              Nhập thông tin tính lương
+            </h2>
             <SalaryForm onSuccess={handleSuccess} />
           </section>
 
-          <section className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Danh sách bảng lương</h2>
+          <section className="bg-white rounded-3xl border border-gray-100 shadow-premium p-8 overflow-hidden">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
+              <span className="w-2 h-7 bg-accent rounded-full"></span>
+              Danh sách bảng lương
+            </h2>
             <SalaryList key={refreshKey} />
           </section>
         </div>
