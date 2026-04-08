@@ -107,9 +107,27 @@ body {
   background: #94a3b8;
 }
 
-/* Hide native browser icons for date/month inputs to prevent redundancy with custom icons */
+/* Hide native browser icons and make the whole input a trigger for the picker */
+input[type="date"],
+input[type="month"] {
+  position: relative;
+  cursor: pointer;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="month"]::-webkit-calendar-picker-indicator {
-  display: none !important;
-  -webkit-appearance: none !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  color: transparent;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  display: block !important;
 }
