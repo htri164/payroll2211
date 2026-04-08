@@ -47,10 +47,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
 
     setFormData((current) => ({
       ...current,
-      [name]:
-        name === 'salary' || name === 'foodAllowance'
-          ? parseFormattedNumber(value)
-          : value,
+      [name]: name === 'salary' ? parseFormattedNumber(value) : value,
     }));
   };
 
@@ -60,8 +57,8 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
 
     try {
       const trimmedName = formData.name.trim();
-      if (!trimmedName) throw new Error("Vui lòng nhập tên nhân viên");
-      if (formData.salary <= 0) throw new Error("Lương cơ bản phải lớn hơn 0");
+      if (!trimmedName) throw new Error('Vui lòng nhập tên nhân viên');
+      if (formData.salary <= 0) throw new Error('Lương cơ bản phải lớn hơn 0');
 
       const joinIso = normalizeJoinDateToIso(joinDateText);
       if (!joinIso) {
@@ -96,7 +93,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="employee-name" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
+        <label htmlFor="employee-name" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
           Tên nhân viên *
         </label>
         <input
@@ -112,7 +109,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
       </div>
 
       <div>
-        <label htmlFor="employee-salary" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
+        <label htmlFor="employee-salary" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
           Lương cơ bản (VND) *
         </label>
         <input
@@ -129,23 +126,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
       </div>
 
       <div>
-        <label htmlFor="employee-food-allowance" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
-          Phụ cấp ăn (VND)
-        </label>
-        <input
-          id="employee-food-allowance"
-          type="text"
-          inputMode="numeric"
-          name="foodAllowance"
-          value={formatNumberInput(formData.foodAllowance)}
-          onChange={handleChange}
-          className={inputClassName}
-          placeholder="Ví dụ: 500.000"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="employee-join-date" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
+        <label htmlFor="employee-join-date" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
           Ngày làm việc
         </label>
         <input
@@ -183,7 +164,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
       </div>
 
       <div>
-        <label htmlFor="employee-factory" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
+        <label htmlFor="employee-factory" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
           Xưởng
         </label>
         <div className="relative">
@@ -218,7 +199,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-xl bg-primary px-6 py-3 font-bold text-white hover:bg-primary-hover disabled:bg-gray-300 transition-all duration-300 premium-shadow flex flex-1 items-center justify-center gap-2 cursor-pointer"
+          className="premium-shadow flex w-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-bold text-white transition-all duration-300 hover:bg-primary-hover disabled:bg-gray-300"
         >
           {loading ? (
             <>

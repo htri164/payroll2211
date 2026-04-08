@@ -7,7 +7,6 @@ export interface Employee {
   name: string;
   position?: string;
   salary: number;
-  foodAllowance: number;
   joinDate: string;
   factory: Factory;
 }
@@ -80,7 +79,6 @@ export const createEmployeeDraft = (
   name: employee?.name ?? '',
   position: employee?.position ?? '',
   salary: employee?.salary ?? 0,
-  foodAllowance: employee?.foodAllowance ?? 0,
   joinDate: employee?.joinDate ?? getCurrentDateInputValue(),
   factory: employee?.factory ?? FACTORIES[0],
 });

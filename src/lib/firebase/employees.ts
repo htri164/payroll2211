@@ -103,6 +103,7 @@ export const updateEmployee = async (id: string, employee: Partial<Employee>) =>
   const payload = {
     ...employee,
     ...(employee.joinDate ? { joinDate: employee.joinDate } : {}),
+    foodAllowance: null,
   };
 
   try {

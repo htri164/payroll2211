@@ -3,6 +3,7 @@ import { ref, push, set, get, update, remove } from 'firebase/database';
 
 export const STANDARD_WORKING_DAYS = 26;
 export const NIGHT_SHIFT_ALLOWANCE = 20_000;
+export const FOOD_ALLOWANCE_PER_WORKING_DAY = 40_000;
 export const MAX_MANUAL_ALLOWANCE_LINES = 20;
 export const MAX_MANUAL_ALLOWANCE_LABEL_LENGTH = 80;
 
@@ -98,19 +99,20 @@ export const buildSalaryRecord = (record: SalaryRecord): SalaryRecord => {
     standardWorkingDays > 0
       ? Math.round((toSafeNumber(record.baseSalary) / standardWorkingDays) * totalWorkedShifts)
       : 0;
+  const foodAllowance = totalWorkedShifts * FOOD_ALLOWANCE_PER_WORKING_DAY;
   const nightAllowance = nightShifts * NIGHT_SHIFT_ALLOWANCE;
   const totalAllowance =
-    toSafeNumber(record.foodAllowance) +
+    foodAllowance +
     nightAllowance +
     attendanceBonus +
     otherAllowanceBase +
     manualAllowanceTotal;
   const totalDeduction = advancePayment + otherDeduction;
-  const totalSalary =
-    toSafeNumber(record.totalSalary) || grossWorkSalary + totalAllowance - totalDeduction;
+  const totalSalary = grossWorkSalary + totalAllowance - totalDeduction;
 
   return {
     ...record,
+    foodAllowance,
     standardWorkingDays,
     dayShifts,
     nightShifts,

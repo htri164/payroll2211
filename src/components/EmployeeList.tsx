@@ -17,7 +17,7 @@ interface EmployeeListProps {
 }
 
 function removeAccents(str: string) {
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
 export default function EmployeeList({
@@ -45,7 +45,7 @@ export default function EmployeeList({
         setEmployees(data);
       } catch (error) {
         const message =
-          error instanceof Error ? error.message : "Không thể tải danh sách nhân viên";
+          error instanceof Error ? error.message : 'Không thể tải danh sách nhân viên';
         console.warn(message);
       } finally {
         setLoading(false);
@@ -58,9 +58,7 @@ export default function EmployeeList({
   const filteredEmployees = useMemo(() => {
     if (!searchQuery.trim()) return employees;
     const normalizedQuery = removeAccents(searchQuery);
-    return employees.filter((emp) =>
-      removeAccents(emp.name).includes(normalizedQuery)
-    );
+    return employees.filter((emp) => removeAccents(emp.name).includes(normalizedQuery));
   }, [employees, searchQuery]);
 
   const handleDelete = async (id?: string) => {
@@ -68,7 +66,7 @@ export default function EmployeeList({
       return;
     }
 
-    if (!window.confirm("Bạn chắc chắn muốn xóa nhân viên này?")) {
+    if (!window.confirm('Bạn chắc chắn muốn xóa nhân viên này?')) {
       return;
     }
 
@@ -78,16 +76,16 @@ export default function EmployeeList({
       if (selectedEmployeeId === id) {
         onClearSelection?.();
       }
-      toast.success("Xóa thành công");
+      toast.success('Xóa thành công');
       onRefresh?.();
     } catch (error) {
-      toast.error("Lỗi xóa nhân viên");
+      toast.error('Lỗi xóa nhân viên');
       console.error(error);
     }
   };
 
   const handleClearSearch = () => {
-    setSearchQuery("");
+    setSearchQuery('');
   };
 
   if (!isConfigured()) {
@@ -101,9 +99,8 @@ export default function EmployeeList({
   return (
     <div className="space-y-6">
       <section>
-        {/* Search Input */}
         <div className="mb-8">
-          <div className="relative group">
+          <div className="group relative">
             <label htmlFor="search" className="sr-only">
               Tìm kiếm nhân viên
             </label>
@@ -113,14 +110,14 @@ export default function EmployeeList({
               placeholder="Tìm theo tên nhân viên (VD: Bay, Tuấn...)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full rounded-2xl border border-gray-100 bg-white px-6 py-4 pr-12 text-base text-gray-900 shadow-premium focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 outline-none placeholder:text-gray-400"
+              className="block w-full rounded-2xl border border-gray-100 bg-white px-6 py-4 pr-12 text-base text-gray-900 shadow-premium outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-primary focus:ring-4 focus:ring-primary/10"
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-4">
               {searchQuery ? (
                 <button
                   type="button"
                   onClick={handleClearSearch}
-                  className="p-2 text-gray-400 hover:text-primary transition-colors"
+                  className="p-2 text-gray-400 transition-colors hover:text-primary"
                   aria-label="Xóa tìm kiếm"
                 >
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -128,14 +125,14 @@ export default function EmployeeList({
                   </svg>
                 </button>
               ) : (
-                <svg className="h-6 w-6 text-gray-300 group-focus-within:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6 text-gray-300 transition-colors group-focus-within:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               )}
             </div>
           </div>
           {filteredEmployees.length !== employees.length && (
-            <p className="mt-3 text-sm text-gray-500 font-medium ml-2">
+            <p className="ml-2 mt-3 text-sm font-medium text-gray-500">
               <span className="text-primary">{filteredEmployees.length}</span> kết quả phù hợp trên tổng số {employees.length} nhân viên
             </p>
           )}
@@ -146,30 +143,28 @@ export default function EmployeeList({
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
               <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)] font-sans">Đang tải...</span>
             </div>
-            <p className="mt-4 text-gray-500 font-medium font-sans">Đang tải danh sách...</p>
+            <p className="mt-4 font-medium font-sans text-gray-500">Đang tải danh sách...</p>
           </div>
         ) : filteredEmployees.length === 0 ? (
-          <div className="py-20 text-center bg-white rounded-3xl border-2 border-dashed border-gray-100">
-            <p className="text-gray-400 text-lg font-medium">
-              {searchQuery ? "Không tìm thấy kết quả phù hợp" : "Chưa có nhân viên nào trong hệ thống"}
+          <div className="rounded-3xl border-2 border-dashed border-gray-100 bg-white py-20 text-center">
+            <p className="text-lg font-medium text-gray-400">
+              {searchQuery ? 'Không tìm thấy kết quả phù hợp' : 'Chưa có nhân viên nào trong hệ thống'}
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto rounded-3xl border border-gray-100 bg-white shadow-premium">
-            <table className="min-w-[900px] w-full table-auto border-collapse">
+            <table className="min-w-[780px] w-full table-auto border-collapse">
               <colgroup>
-                <col className="w-[24%]" />
+                <col className="w-[30%]" />
+                <col className="w-[20%]" />
                 <col className="w-[18%]" />
-                <col className="w-[15%]" />
-                <col className="w-[15%]" />
                 <col className="w-[12%]" />
-                <col className="w-[16%]" />
+                <col className="w-[20%]" />
               </colgroup>
               <thead>
                 <tr className="bg-gray-100 text-sm">
                   <th className="px-5 py-4 text-left font-semibold text-gray-900">Tên</th>
                   <th className="px-5 py-4 text-right font-semibold text-gray-900">Lương cơ bản</th>
-                  <th className="px-5 py-4 text-right font-semibold text-gray-900">Phụ cấp ăn</th>
                   <th className="px-5 py-4 text-left font-semibold text-gray-900">Ngày làm việc</th>
                   <th className="px-5 py-4 text-left font-semibold text-gray-900">Xưởng</th>
                   <th className="px-5 py-4 text-center font-semibold text-gray-900">Hành động</th>
@@ -184,16 +179,13 @@ export default function EmployeeList({
                     }`}
                   >
                     <td className="px-5 py-4 text-gray-900">{employee.name}</td>
-                    <td className="px-5 py-4 text-right text-gray-900 whitespace-nowrap">
+                    <td className="whitespace-nowrap px-5 py-4 text-right text-gray-900">
                       {formatCurrency(employee.salary)}
                     </td>
-                    <td className="px-5 py-4 text-right text-gray-900 whitespace-nowrap">
-                      {formatCurrency(employee.foodAllowance)}
-                    </td>
-                    <td className="px-5 py-4 text-gray-900 whitespace-nowrap">
+                    <td className="whitespace-nowrap px-5 py-4 text-gray-900">
                       {formatDate(employee.joinDate)}
                     </td>
-                    <td className="px-5 py-4 text-gray-900 whitespace-nowrap">{employee.factory}</td>
+                    <td className="whitespace-nowrap px-5 py-4 text-gray-900">{employee.factory}</td>
                     <td className="px-5 py-4">
                       <div className="flex items-center justify-center gap-2 whitespace-nowrap">
                         <button
@@ -222,4 +214,3 @@ export default function EmployeeList({
     </div>
   );
 }
-
