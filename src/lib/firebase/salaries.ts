@@ -1,18 +1,44 @@
 import { database, isConfigured } from './config';
 import { ref, push, set, get, update, remove } from 'firebase/database';
 
+export const STANDARD_WORKING_DAYS = 26;
+export const NIGHT_SHIFT_ALLOWANCE = 20_000;
+export const MAX_MANUAL_ALLOWANCE_LINES = 20;
+export const MAX_MANUAL_ALLOWANCE_LABEL_LENGTH = 80;
+
+export interface ManualAllowanceLine {
+  label: string;
+  amount: number;
+}
+
 export interface SalaryRecord {
   id?: string;
   employeeId: string;
   employeeName: string;
   baseSalary: number;
   foodAllowance: number;
-  additionalFees: number;
-  deductions: number;
-  bonus: number;
-  month: string; // YYYY-MM format
+  standardWorkingDays: number;
+  dayShifts: number;
+  nightShifts: number;
+  leaveDays: number;
+  advancePayment: number;
+  attendanceBonus: number;
+  otherAllowance: number;
+  /** Các dòng tự nhập (tên + số tiền), cộng thêm vào phụ cấp */
+  manualAllowanceLines?: ManualAllowanceLine[];
+  /** Tổng các dòng manual (đọc/ghi phụ để hiển thị; luôn có thể suy ra từ manualAllowanceLines) */
+  manualAllowanceTotal?: number;
+  otherDeduction: number;
+  grossWorkSalary?: number;
+  nightAllowance?: number;
+  totalAllowance?: number;
+  totalDeduction?: number;
+  month: string;
   totalSalary?: number;
   createdAt?: string;
+  additionalFees?: number;
+  deductions?: number;
+  bonus?: number;
 }
 
 const checkFirebaseConfig = () => {
@@ -23,53 +49,136 @@ const checkFirebaseConfig = () => {
   }
 };
 
-// Calculate total salary
-export const calculateTotalSalary = (record: SalaryRecord) => {
-  return (
-    record.baseSalary +
-    record.foodAllowance +
-    record.additionalFees +
-    record.bonus -
-    record.deductions
-  );
+const toSafeNumber = (value: unknown) =>
+  typeof value === 'number' && Number.isFinite(value) ? value : 0;
+
+export const normalizeManualAllowanceLines = (raw: unknown): ManualAllowanceLine[] => {
+  let list: unknown[] = [];
+  if (Array.isArray(raw)) {
+    list = raw;
+  } else if (raw && typeof raw === 'object') {
+    list = Object.values(raw as Record<string, unknown>);
+  } else {
+    return [];
+  }
+  const out: ManualAllowanceLine[] = [];
+  for (const item of list) {
+    const row = item as Record<string, unknown>;
+    const label =
+      typeof row.label === 'string'
+        ? row.label.trim().slice(0, MAX_MANUAL_ALLOWANCE_LABEL_LENGTH)
+        : '';
+    if (!label) continue;
+    const amount = Math.round(toSafeNumber(row.amount));
+    out.push({ label, amount });
+    if (out.length >= MAX_MANUAL_ALLOWANCE_LINES) break;
+  }
+  return out;
 };
 
-// Add salary record
+const sumManualAllowance = (lines: ManualAllowanceLine[]) =>
+  lines.reduce((sum, line) => sum + toSafeNumber(line.amount), 0);
+
+export const buildSalaryRecord = (record: SalaryRecord): SalaryRecord => {
+  const standardWorkingDays = toSafeNumber(record.standardWorkingDays) || STANDARD_WORKING_DAYS;
+  const dayShifts = toSafeNumber(record.dayShifts);
+  const nightShifts = toSafeNumber(record.nightShifts);
+  const leaveDays = toSafeNumber(record.leaveDays);
+  const advancePayment = toSafeNumber(record.advancePayment);
+  const attendanceBonus = toSafeNumber(record.attendanceBonus);
+  const otherAllowanceBase =
+    toSafeNumber(record.otherAllowance) ||
+    toSafeNumber(record.additionalFees) + toSafeNumber(record.bonus);
+  const manualAllowanceLines = normalizeManualAllowanceLines(record.manualAllowanceLines);
+  const manualAllowanceTotal = sumManualAllowance(manualAllowanceLines);
+  const otherDeduction =
+    toSafeNumber(record.otherDeduction) || toSafeNumber(record.deductions);
+  const totalWorkedShifts = dayShifts + nightShifts;
+  const grossWorkSalary =
+    standardWorkingDays > 0
+      ? Math.round((toSafeNumber(record.baseSalary) / standardWorkingDays) * totalWorkedShifts)
+      : 0;
+  const nightAllowance = nightShifts * NIGHT_SHIFT_ALLOWANCE;
+  const totalAllowance =
+    toSafeNumber(record.foodAllowance) +
+    nightAllowance +
+    attendanceBonus +
+    otherAllowanceBase +
+    manualAllowanceTotal;
+  const totalDeduction = advancePayment + otherDeduction;
+  const totalSalary =
+    toSafeNumber(record.totalSalary) || grossWorkSalary + totalAllowance - totalDeduction;
+
+  return {
+    ...record,
+    standardWorkingDays,
+    dayShifts,
+    nightShifts,
+    leaveDays,
+    advancePayment,
+    attendanceBonus,
+    otherAllowance: otherAllowanceBase,
+    manualAllowanceLines,
+    manualAllowanceTotal,
+    otherDeduction,
+    grossWorkSalary,
+    nightAllowance,
+    totalAllowance,
+    totalDeduction,
+    totalSalary,
+  };
+};
+
+export const calculateTotalSalary = (record: SalaryRecord) =>
+  buildSalaryRecord(record).totalSalary ?? 0;
+
 export const addSalaryRecord = async (record: SalaryRecord) => {
   checkFirebaseConfig();
   try {
-    const totalSalary = calculateTotalSalary(record);
+    const normalizedRecord = buildSalaryRecord(record);
     const newRecordRef = push(ref(database, 'salaries'));
     await set(newRecordRef, {
-      employeeId: record.employeeId,
-      employeeName: record.employeeName,
-      baseSalary: record.baseSalary,
-      foodAllowance: record.foodAllowance,
-      additionalFees: record.additionalFees || 0,
-      deductions: record.deductions || 0,
-      bonus: record.bonus || 0,
-      month: record.month,
-      totalSalary: totalSalary,
+      employeeId: normalizedRecord.employeeId,
+      employeeName: normalizedRecord.employeeName,
+      baseSalary: normalizedRecord.baseSalary,
+      foodAllowance: normalizedRecord.foodAllowance,
+      standardWorkingDays: normalizedRecord.standardWorkingDays,
+      dayShifts: normalizedRecord.dayShifts,
+      nightShifts: normalizedRecord.nightShifts,
+      leaveDays: normalizedRecord.leaveDays,
+      advancePayment: normalizedRecord.advancePayment,
+      attendanceBonus: normalizedRecord.attendanceBonus,
+      otherAllowance: normalizedRecord.otherAllowance,
+      manualAllowanceLines: normalizedRecord.manualAllowanceLines ?? [],
+      manualAllowanceTotal: normalizedRecord.manualAllowanceTotal ?? 0,
+      otherDeduction: normalizedRecord.otherDeduction,
+      grossWorkSalary: normalizedRecord.grossWorkSalary,
+      nightAllowance: normalizedRecord.nightAllowance,
+      totalAllowance: normalizedRecord.totalAllowance,
+      totalDeduction: normalizedRecord.totalDeduction,
+      month: normalizedRecord.month,
+      totalSalary: normalizedRecord.totalSalary,
       createdAt: new Date().toISOString(),
     });
-    return { id: newRecordRef.key, ...record, totalSalary };
+    return { id: newRecordRef.key ?? undefined, ...normalizedRecord };
   } catch (error) {
     console.error('Error adding salary record:', error);
     throw error;
   }
 };
 
-// Get all salary records
 export const getSalaryRecords = async () => {
   checkFirebaseConfig();
   try {
     const snapshot = await get(ref(database, 'salaries'));
     const records: SalaryRecord[] = [];
     snapshot.forEach((childSnapshot) => {
-      records.push({
-        id: childSnapshot.key || '',
-        ...childSnapshot.val(),
-      });
+      records.push(
+        buildSalaryRecord({
+          id: childSnapshot.key || '',
+          ...childSnapshot.val(),
+        })
+      );
     });
     return records.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
   } catch (error) {
@@ -78,43 +187,57 @@ export const getSalaryRecords = async () => {
   }
 };
 
-// Get salary records by month
 export const getSalaryRecordsByMonth = async (month: string) => {
   checkFirebaseConfig();
   try {
     const records = await getSalaryRecords();
-    return records.filter((r) => r.month === month);
+    return records.filter((record) => record.month === month);
   } catch (error) {
     console.error('Error getting salary records by month:', error);
     throw error;
   }
 };
 
-// Get salary record for employee
 export const getEmployeeSalaryRecord = async (employeeId: string, month: string) => {
   checkFirebaseConfig();
   try {
     const records = await getSalaryRecords();
-    return records.find((r) => r.employeeId === employeeId && r.month === month) || null;
+    return records.find((record) => record.employeeId === employeeId && record.month === month) || null;
   } catch (error) {
     console.error('Error getting employee salary record:', error);
     throw error;
   }
 };
 
-// Update salary record
 export const updateSalaryRecord = async (id: string, record: Partial<SalaryRecord>) => {
   checkFirebaseConfig();
   try {
-    await update(ref(database, `salaries/${id}`), record);
-    return { id, ...record };
+    const payload = buildSalaryRecord({
+      employeeId: '',
+      employeeName: '',
+      baseSalary: 0,
+      foodAllowance: 0,
+      standardWorkingDays: STANDARD_WORKING_DAYS,
+      dayShifts: 0,
+      nightShifts: 0,
+      leaveDays: 0,
+      advancePayment: 0,
+      attendanceBonus: 0,
+      otherAllowance: 0,
+      manualAllowanceLines: [],
+      otherDeduction: 0,
+      month: '',
+      ...record,
+    });
+
+    await update(ref(database, `salaries/${id}`), payload);
+    return { id, ...payload };
   } catch (error) {
     console.error('Error updating salary record:', error);
     throw error;
   }
 };
 
-// Delete salary record
 export const deleteSalaryRecord = async (id: string) => {
   checkFirebaseConfig();
   try {

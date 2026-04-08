@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import EmployeeForm from './EmployeeForm';
 import { isConfigured } from '@/lib/firebase/config';
 import { deleteEmployee, getEmployees } from '@/lib/firebase/employees';
 import { formatCurrency, formatDate, type Employee } from '@/lib/employees';
@@ -10,16 +9,26 @@ import { formatCurrency, formatDate, type Employee } from '@/lib/employees';
 interface EmployeeListProps {
   onRefresh?: () => void;
   refreshToken?: number;
+  /** Id nhân viên đang mở trên form (để tô sáng dòng) */
+  selectedEmployeeId?: string | null;
+  /** Chọn nhân viên để đổ dữ liệu lên form bên trái */
+  onSelectEmployee?: (employee: Employee) => void;
+  onClearSelection?: () => void;
 }
 
 function removeAccents(str: string) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-export default function EmployeeList({ onRefresh, refreshToken = 0 }: EmployeeListProps) {
+export default function EmployeeList({
+  onRefresh,
+  refreshToken = 0,
+  selectedEmployeeId = null,
+  onSelectEmployee,
+  onClearSelection,
+}: EmployeeListProps) {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -46,11 +55,6 @@ export default function EmployeeList({ onRefresh, refreshToken = 0 }: EmployeeLi
     void fetchEmployees();
   }, [refreshToken]);
 
-  const editingEmployee = useMemo(
-    () => employees.find((employee) => employee.id === editingId),
-    [employees, editingId]
-  );
-
   const filteredEmployees = useMemo(() => {
     if (!searchQuery.trim()) return employees;
     const normalizedQuery = removeAccents(searchQuery);
@@ -71,8 +75,8 @@ export default function EmployeeList({ onRefresh, refreshToken = 0 }: EmployeeLi
     try {
       await deleteEmployee(id);
       setEmployees((current) => current.filter((employee) => employee.id !== id));
-      if (editingId === id) {
-        setEditingId(null);
+      if (selectedEmployeeId === id) {
+        onClearSelection?.();
       }
       toast.success("Xóa thành công");
       onRefresh?.();
@@ -96,30 +100,6 @@ export default function EmployeeList({ onRefresh, refreshToken = 0 }: EmployeeLi
 
   return (
     <div className="space-y-6">
-      {editingEmployee && (
-        <section className="rounded-xl border border-blue-100 bg-blue-50/60 p-4">
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <h3 className="text-lg font-semibold text-gray-900">Chỉnh sửa nhân viên</h3>
-            <button
-              type="button"
-              onClick={() => setEditingId(null)}
-              className="text-sm font-medium text-gray-500 hover:text-gray-700"
-            >
-              Hủy
-            </button>
-          </div>
-          <EmployeeForm
-            employee={editingEmployee}
-            onSuccess={async () => {
-              setEditingId(null);
-              const data = await getEmployees();
-              setEmployees(data);
-              onRefresh?.();
-            }}
-          />
-        </section>
-      )}
-
       <section>
         {/* Search Input */}
         <div className="mb-8">
@@ -197,7 +177,12 @@ export default function EmployeeList({ onRefresh, refreshToken = 0 }: EmployeeLi
               </thead>
               <tbody>
                 {filteredEmployees.map((employee) => (
-                  <tr key={employee.id} className="border-t border-gray-200 align-middle hover:bg-gray-50">
+                  <tr
+                    key={employee.id}
+                    className={`border-t border-gray-200 align-middle hover:bg-gray-50 ${
+                      employee.id === selectedEmployeeId ? 'bg-primary/5 ring-1 ring-inset ring-primary/20' : ''
+                    }`}
+                  >
                     <td className="px-5 py-4 text-gray-900">{employee.name}</td>
                     <td className="px-5 py-4 text-right text-gray-900 whitespace-nowrap">
                       {formatCurrency(employee.salary)}
@@ -213,7 +198,7 @@ export default function EmployeeList({ onRefresh, refreshToken = 0 }: EmployeeLi
                       <div className="flex items-center justify-center gap-2 whitespace-nowrap">
                         <button
                           type="button"
-                          onClick={() => setEditingId(employee.id ?? null)}
+                          onClick={() => employee.id && onSelectEmployee?.(employee)}
                           className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
                         >
                           Sửa

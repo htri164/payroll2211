@@ -1,21 +1,25 @@
-'use client';
+﻿'use client';
 
-import { useState, useEffect } from 'react';
-import { SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
-import { isConfigured } from '@/lib/firebase/config';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { formatCurrency } from '@/lib/employees';
+import { type SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
 
-export default function SalaryList() {
+interface SalaryListProps {
+  onEdit?: (salary: SalaryRecord) => void;
+  refreshToken?: number;
+}
+
+const getCurrentMonthValue = () => new Date().toISOString().slice(0, 7);
+
+export default function SalaryList({ onEdit, refreshToken = 0 }: SalaryListProps) {
   const [salaries, setSalaries] = useState<SalaryRecord[]>([]);
   const [loading, setLoading] = useState(false);
-  const [filterMonth, setFilterMonth] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+  const [filterMonth, setFilterMonth] = useState(getCurrentMonthValue());
 
   useEffect(() => {
-    if (isConfigured()) {
-      fetchSalaries();
-    }
-  }, []);
+    fetchSalaries();
+  }, [refreshToken]);
 
   const fetchSalaries = async () => {
     setLoading(true);
@@ -23,111 +27,90 @@ export default function SalaryList() {
       const data = await getSalaryRecords();
       setSalaries(data);
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Không thể tải danh sách bảng lương';
+      const message =
+        error instanceof Error ? error.message : 'Không thể tải danh sách bảng lương';
       console.warn(message);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredRecords = salaries.filter((s) => s.month === filterMonth);
+  const filteredRecords = salaries.filter((salary) => salary.month === filterMonth);
 
   return (
     <div className="space-y-8">
-      {/* Month Filter */}
-      <div className="flex flex-col sm:flex-row items-end gap-6">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="w-full sm:w-auto">
-          <label className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
+          <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
             Lọc theo tháng dữ liệu
           </label>
-          <div className="relative group">
-            <input
-              type="month"
-              value={filterMonth}
-              onChange={(e) => setFilterMonth(e.target.value)}
-              className="h-12 w-full sm:w-64 rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 shadow-premium focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/10 transition-all duration-200 pr-10 [&::-webkit-calendar-picker-indicator]:hidden"
-            />
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-              <svg
-                className="h-5 w-5 text-gray-400 group-focus-within:text-accent transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-          </div>
+          <input
+            type="month"
+            value={filterMonth}
+            onChange={(e) => setFilterMonth(e.target.value)}
+            className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 shadow-premium focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/10 transition-all duration-200 sm:w-64"
+          />
         </div>
 
         <Link
-          href="/salary/print"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-bold rounded-xl hover:bg-accent-hover transition-all duration-300 premium-shadow group"
+          href={`/print?month=${filterMonth}`}
+          className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 font-bold text-white transition-all duration-300 hover:bg-accent-hover"
         >
-          <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-          </svg>
           In phiếu lương hàng loạt
         </Link>
       </div>
 
       {loading ? (
-        <div className="py-20 text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-accent border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
-            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)] font-sans">Đang tải...</span>
-          </div>
-          <p className="mt-4 text-gray-500 font-medium">Đang tải dữ liệu bảng lương...</p>
-        </div>
+        <div className="py-20 text-center text-gray-500">Đang tải dữ liệu bảng lương...</div>
       ) : filteredRecords.length === 0 ? (
-        <div className="py-20 text-center bg-gray-50/50 rounded-3xl border-2 border-dashed border-gray-100 mt-6">
-          <p className="text-gray-400 text-lg font-medium">Không tìm thấy dữ liệu lương cho tháng {filterMonth}</p>
+        <div className="rounded-3xl border-2 border-dashed border-gray-100 bg-gray-50/50 py-20 text-center text-gray-400">
+          Không tìm thấy dữ liệu lương cho tháng {filterMonth}
         </div>
       ) : (
-        <div className="rounded-3xl border border-gray-100 bg-white shadow-premium overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-100">
-            <thead>
-              <tr className="bg-gray-50/80 border-b border-gray-100">
-                <th className="px-6 py-4 text-left font-bold text-gray-900 uppercase text-xs tracking-wider">Tên nhân viên</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Lương cơ bản</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Phụ cấp</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Phụ phí</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Thưởng</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Khấu trừ</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Tổng lương</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {filteredRecords.map((salary: SalaryRecord) => (
-                <tr key={salary.id} className="hover:bg-gray-50/50 transition-colors">
-                  <td className="px-4 py-2">{salary.employeeName}</td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.baseSalary.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.foodAllowance.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.additionalFees.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.bonus.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.deductions.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right font-bold text-green-600">
-                    {salary.totalSalary?.toLocaleString('vi-VN')} đ
-                  </td>
+        <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-premium">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-100">
+              <thead>
+                <tr className="bg-gray-50/80">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-900">Nhân viên</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Công ngày</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Công đêm</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Nghỉ</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Lương công</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Tổng phụ cấp</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Tổng bị trừ</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Thực lãnh</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Thao tác</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {filteredRecords.map((salary) => (
+                  <tr key={salary.id} className="transition-colors hover:bg-gray-50/60">
+                    <td className="px-6 py-4">
+                      <p className="font-semibold text-gray-900">{salary.employeeName}</p>
+                      <p className="text-sm text-gray-500">{salary.month}</p>
+                    </td>
+                    <td className="px-6 py-4 text-right text-gray-700">{salary.dayShifts}</td>
+                    <td className="px-6 py-4 text-right text-gray-700">{salary.nightShifts}</td>
+                    <td className="px-6 py-4 text-right text-gray-700">{salary.leaveDays}</td>
+                    <td className="px-6 py-4 text-right text-gray-900">{formatCurrency(salary.grossWorkSalary ?? 0)}</td>
+                    <td className="px-6 py-4 text-right text-blue-600">{formatCurrency(salary.totalAllowance ?? 0)}</td>
+                    <td className="px-6 py-4 text-right text-red-600">{formatCurrency(salary.totalDeduction ?? 0)}</td>
+                    <td className="px-6 py-4 text-right font-bold text-success">{formatCurrency(salary.totalSalary ?? 0)}</td>
+                    <td className="px-6 py-4 text-right">
+                      <button
+                        type="button"
+                        onClick={() => onEdit?.(salary)}
+                        className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-600"
+                      >
+                        Chỉnh sửa
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

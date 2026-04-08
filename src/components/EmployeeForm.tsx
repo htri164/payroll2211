@@ -7,6 +7,9 @@ import {
   createEmployeeDraft,
   FACTORIES,
   formatNumberInput,
+  getCurrentDateInputValue,
+  isoDateToDdMmYyyy,
+  normalizeJoinDateToIso,
   parseFormattedNumber,
 } from '@/lib/employees';
 import { addEmployee, updateEmployee } from '@/lib/firebase/employees';
@@ -14,6 +17,8 @@ import { addEmployee, updateEmployee } from '@/lib/firebase/employees';
 interface EmployeeFormProps {
   employee?: Employee;
   onSuccess?: () => void;
+  /** Gọi khi bấm Hủy chọn (đang sửa nhân viên có sẵn) */
+  onCancel?: () => void;
 }
 
 const inputClassName =
@@ -22,12 +27,17 @@ const inputClassName =
 const selectClassName =
   'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 pr-10 text-[16px] leading-none text-gray-900 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300';
 
-export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps) {
+export default function EmployeeForm({ employee, onSuccess, onCancel }: EmployeeFormProps) {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(() => createEmployeeDraft(employee));
+  const [joinDateText, setJoinDateText] = useState(() =>
+    isoDateToDdMmYyyy(createEmployeeDraft(employee).joinDate)
+  );
 
   useEffect(() => {
-    setFormData(createEmployeeDraft(employee));
+    const draft = createEmployeeDraft(employee);
+    setFormData(draft);
+    setJoinDateText(isoDateToDdMmYyyy(draft.joinDate));
   }, [employee]);
 
   const handleChange = (
@@ -53,20 +63,27 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
       if (!trimmedName) throw new Error("Vui lòng nhập tên nhân viên");
       if (formData.salary <= 0) throw new Error("Lương cơ bản phải lớn hơn 0");
 
+      const joinIso = normalizeJoinDateToIso(joinDateText);
+      if (!joinIso) {
+        throw new Error('Ngày làm việc không hợp lệ. Dùng định dạng dd/mm/yyyy');
+      }
+
       const payload: Employee = {
         ...formData,
         name: trimmedName,
+        joinDate: joinIso,
       };
 
       if (employee?.id) {
         await updateEmployee(employee.id, payload);
-        toast.success('Cập nhật nhân viên thành công');
       } else {
         await addEmployee(payload);
-        toast.success('Thêm nhân viên thành công');
-        setFormData(createEmployeeDraft());
+        const next = createEmployeeDraft();
+        setFormData(next);
+        setJoinDateText(isoDateToDdMmYyyy(next.joinDate));
       }
 
+      toast.success('Cập nhật thành công');
       onSuccess?.();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Có lỗi xảy ra. Vui lòng thử lại');
@@ -133,12 +150,36 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
         </label>
         <input
           id="employee-join-date"
-          type="date"
-          name="joinDate"
-          value={formData.joinDate}
-          onChange={handleChange}
-          className={`${inputClassName} [&::-webkit-calendar-picker-indicator]:hidden`}
+          type="text"
+          name="joinDateDisplay"
+          lang="vi"
+          inputMode="numeric"
+          autoComplete="off"
+          placeholder="dd/mm/yyyy"
+          value={joinDateText}
+          onChange={(e) => setJoinDateText(e.target.value)}
+          onBlur={() => {
+            const t = joinDateText.trim();
+            if (!t) {
+              const today = getCurrentDateInputValue();
+              setFormData((c) => ({ ...c, joinDate: today }));
+              setJoinDateText(isoDateToDdMmYyyy(today));
+              return;
+            }
+            const iso = normalizeJoinDateToIso(t);
+            if (iso) {
+              setFormData((c) => ({ ...c, joinDate: iso }));
+              setJoinDateText(isoDateToDdMmYyyy(iso));
+            } else {
+              toast.error('Ngày không hợp lệ. Dùng dd/mm/yyyy (ví dụ 08/04/2026)');
+              setJoinDateText(isoDateToDdMmYyyy(formData.joinDate));
+            }
+          }}
+          className={inputClassName}
         />
+        <p className="mt-1.5 ml-1 text-xs text-gray-500">
+          Định dạng <span className="font-semibold">dd/mm/yyyy</span> — ngày mặc định theo giờ Việt Nam (UTC+7).
+        </p>
       </div>
 
       <div>
@@ -173,28 +214,33 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
         </div>
       </div>
 
-      <div className="flex gap-3 pt-4">
+      <div className="flex flex-col gap-3 pt-4 sm:flex-row">
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-xl bg-primary px-6 py-3 font-bold text-white hover:bg-primary-hover disabled:bg-gray-300 transition-all duration-300 premium-shadow group flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full rounded-xl bg-primary px-6 py-3 font-bold text-white hover:bg-primary-hover disabled:bg-gray-300 transition-all duration-300 premium-shadow flex flex-1 items-center justify-center gap-2 cursor-pointer"
         >
           {loading ? (
-            <svg className="h-5 w-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-          ) : employee ? (
-            'Cập nhật thông tin'
-          ) : (
             <>
-              Thêm nhân viên
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              <svg className="h-5 w-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
+              Đang cập nhật...
             </>
+          ) : (
+            'Cập nhật'
           )}
         </button>
+        {employee?.id && onCancel && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="w-full rounded-xl border border-gray-200 bg-white px-6 py-3 font-bold text-gray-700 transition hover:bg-gray-50 sm:w-auto sm:min-w-[7rem]"
+          >
+            Hủy chọn
+          </button>
+        )}
       </div>
     </form>
   );
