@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background p-4 lg:p-10 font-sans">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <header className="mb-12">
           <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight leading-none">
             Chào mừng trở lại, <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">Quản trị viên</span>

@@ -15,7 +15,7 @@ export default function SalaryPage() {
 
   return (
     <main className="min-h-screen bg-background p-4 lg:p-10">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
             Tính Toán <span className="text-success">Lương Thưởng</span>
