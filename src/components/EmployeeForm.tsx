@@ -17,10 +17,10 @@ interface EmployeeFormProps {
 }
 
 const inputClassName =
-  'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200';
+  'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300';
 
 const selectClassName =
-  'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 pr-10 text-[16px] leading-none text-gray-900 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200';
+  'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 pr-10 text-[16px] leading-none text-gray-900 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-300';
 
 export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps) {
   const [loading, setLoading] = useState(false);

@@ -5,28 +5,32 @@
   --background: #f8fafc;
   --foreground: #0f172a;
 
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
   --primary-light: #eff6ff;
 
-  --success: #16a34a;
-  --success-hover: #15803d;
-  --success-light: #f0fdf4;
+  --success: #10b981;
+  --success-hover: #059669;
+  --success-light: #ecfdf5;
 
-  --accent: #9333ea;
-  --accent-hover: #7e22ce;
-  --accent-light: #f5f3ff;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-light: #fffbeb;
+
+  --cta: #f97316;
+  --cta-hover: #ea580c;
+  --cta-light: #fff7ed;
 
   --card-bg: #ffffff;
-  --card-border: #e2e8f0;
+  --card-border: #f1f5f9;
 
-  --radius-xl: 1.25rem;
+  --radius-xl: 1.5rem;
   --radius-lg: 1rem;
   --radius-md: 0.75rem;
   --radius-sm: 0.5rem;
 
-  --shadow-premium: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-  --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
 }
 
 @theme inline {
@@ -41,6 +45,9 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-light: var(--accent-light);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-light: var(--cta-light);
 
   --font-sans: 'Fira Sans', var(--font-geist-sans), sans-serif;
   --font-mono: 'Fira Code', var(--font-geist-mono), monospace;
@@ -52,18 +59,6 @@
 
   --shadow-premium: var(--shadow-premium);
   --shadow-hover: var(--shadow-hover);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f1f5f9;
-    --card-bg: #0f172a;
-    --card-border: #1e293b;
-    --primary-light: rgba(37, 99, 235, 0.1);
-    --success-light: rgba(22, 163, 74, 0.1);
-    --accent-light: rgba(147, 51, 234, 0.1);
-  }
 }
 
 body {

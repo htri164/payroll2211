@@ -92,14 +92,14 @@ export default function SalaryList() {
         <div className="rounded-3xl border border-gray-100 bg-white shadow-premium overflow-hidden">
           <table className="min-w-full divide-y divide-gray-100">
             <thead>
-              <tr className="bg-gray-100 border border-gray-300">
-                <th className="px-4 py-2 text-left font-semibold">Tên nhân viên</th>
-                <th className="px-4 py-2 text-right font-semibold">Lương cơ bản</th>
-                <th className="px-4 py-2 text-right font-semibold">Phụ cấp</th>
-                <th className="px-4 py-2 text-right font-semibold">Phụ phí</th>
-                <th className="px-4 py-2 text-right font-semibold">Thưởng</th>
-                <th className="px-4 py-2 text-right font-semibold">Khấu trừ</th>
-                <th className="px-4 py-2 text-right font-semibold">Tổng lương</th>
+              <tr className="bg-gray-50/80 border-b border-gray-100">
+                <th className="px-6 py-4 text-left font-bold text-gray-900 uppercase text-xs tracking-wider">Tên nhân viên</th>
+                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Lương cơ bản</th>
+                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Phụ cấp</th>
+                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Phụ phí</th>
+                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Thưởng</th>
+                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Khấu trừ</th>
+                <th className="px-6 py-4 text-right font-bold text-gray-900 uppercase text-xs tracking-wider">Tổng lương</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">

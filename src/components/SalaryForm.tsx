@@ -121,7 +121,7 @@ export default function SalaryForm({ onSuccess }: SalaryFormProps) {
             <select
               onChange={handleChangeSelect}
               value={selectedEmployee?.id || ''}
-              className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 focus:border-success focus:outline-none focus:ring-4 focus:ring-success/10 transition-all duration-200 appearance-none pr-10"
+              className="h-12 w-full rounded-xl border border-gray-100 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 shadow-sm focus:border-success focus:outline-none focus:ring-4 focus:ring-success/10 transition-all duration-300 appearance-none pr-10"
               required
             >
               <option value="">-- Chọn nhân viên --</option>

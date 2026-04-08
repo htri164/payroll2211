@@ -41,54 +41,64 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-background p-6">
-      <div className="max-w-6xl mx-auto py-12">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
-            Quản Lý <span className="text-primary">Payroll</span> Chuyên Nghiệp
+    <main className="min-h-screen bg-background p-4 lg:p-10 font-sans">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-12">
+          <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight leading-none">
+            Chào mừng trở lại, <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">Quản trị viên</span>
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Giải pháp toàn diện cho việc quản lý nhân sự, tính toán lương và in ấn phiếu lương tự động.
+          <p className="mt-4 text-lg text-gray-500 font-medium">
+            Hệ thống quản lý lương chuyên nghiệp dành cho doanh nghiệp của bạn.
           </p>
-        </div>
+        </header>
 
-        {/* Stats */}
-        {!loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-premium premium-shadow group">
-              <div className="flex items-center gap-6">
-                <div className="p-4 bg-primary-light rounded-2xl text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm font-semibold uppercase tracking-wider">Tổng nhân viên</p>
-                  <p className="text-5xl font-extrabold text-gray-900 mt-1">
-                    {stats.employees}
-                  </p>
-                </div>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="group bg-white p-8 rounded-3xl border border-gray-100 shadow-premium hover:shadow-hover transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+            <div className="flex flex-col gap-4">
+              <div className="w-12 h-12 bg-primary-light text-primary rounded-2xl flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
               </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-premium premium-shadow group">
-              <div className="flex items-center gap-6">
-                <div className="p-4 bg-success-light rounded-2xl text-success group-hover:bg-success group-hover:text-white transition-all duration-500">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-500 text-sm font-semibold uppercase tracking-wider">Bảng lương tháng</p>
-                  <p className="text-5xl font-extrabold text-gray-900 mt-1">
-                    {stats.salaryRecords}
-                  </p>
-                </div>
+              <div>
+                <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Tổng nhân viên</p>
+                <h3 className="text-4xl font-black text-gray-900 mt-1">{stats.employees}</h3>
               </div>
             </div>
           </div>
-        )}
+
+          <div className="group bg-white p-8 rounded-3xl border border-gray-100 shadow-premium hover:shadow-hover transition-all duration-300 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-success/5 rounded-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+            <div className="flex flex-col gap-4">
+              <div className="w-12 h-12 bg-success-light text-success rounded-2xl flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Bảng lương</p>
+                <h3 className="text-4xl font-black text-gray-900 mt-1">{stats.salaryRecords}</h3>
+              </div>
+            </div>
+          </div>
+
+          <div className="group bg-white p-8 rounded-3xl border border-gray-100 shadow-premium hover:shadow-hover transition-all duration-300 relative overflow-hidden col-span-1 md:col-span-2">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-110"></div>
+            <div className="flex flex-col gap-4">
+              <div className="w-12 h-12 bg-accent-light text-accent rounded-2xl flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Trạng thái hệ thống</p>
+                <h3 className="text-2xl font-black text-accent mt-1">Đang hoạt động ổn định</h3>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
