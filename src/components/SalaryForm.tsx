@@ -149,31 +149,13 @@ export default function SalaryForm({ onSuccess }: SalaryFormProps) {
           <label className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
             Tháng *
           </label>
-          <div className="relative group">
-            <input
-              type="month"
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
-              className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 focus:border-success focus:outline-none focus:ring-4 focus:ring-success/10 transition-all duration-200 pr-10 [&::-webkit-calendar-picker-indicator]:hidden"
-              required
-            />
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-              <svg
-                className="h-5 w-5 text-gray-400 group-focus-within:text-success transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-          </div>
+          <input
+            type="month"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 focus:border-success focus:outline-none focus:ring-4 focus:ring-success/10 transition-all duration-200 [&::-webkit-calendar-picker-indicator]:hidden"
+            required
+          />
         </div>
 
         {selectedEmployee && (

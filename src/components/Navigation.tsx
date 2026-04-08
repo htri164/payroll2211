@@ -87,15 +87,6 @@ export default function Navigation() {
             </Link>
           ))}
         </nav>
-
-        <div className="p-4 mt-auto">
-          <div className="bg-primary-light p-4 rounded-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-full -mr-8 -mt-8"></div>
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-1 relative">Hỗ trợ 24/7</p>
-            <p className="text-sm font-medium text-blue-800 relative">Cần trợ giúp?</p>
-            <button className="mt-3 w-full bg-white text-primary text-xs font-bold py-2 rounded-xl shadow-sm hover:shadow-md transition-all active:scale-95">Liên hệ ngay</button>
-          </div>
-        </div>
       </aside>
     </>
   );

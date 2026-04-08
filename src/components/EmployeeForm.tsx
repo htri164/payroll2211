@@ -131,32 +131,14 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
         <label htmlFor="employee-join-date" className="mb-1.5 block text-sm font-semibold text-gray-700 ml-1">
           Ngày làm việc
         </label>
-        <div className="relative">
-          <input
-            id="employee-join-date"
-            type="date"
-            name="joinDate"
-            value={formData.joinDate}
-            onChange={handleChange}
-            className={`${inputClassName} !pr-10 [&::-webkit-calendar-picker-indicator]:hidden`}
-          />
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <svg
-              className="h-5 w-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
-        </div>
+        <input
+          id="employee-join-date"
+          type="date"
+          name="joinDate"
+          value={formData.joinDate}
+          onChange={handleChange}
+          className={`${inputClassName} [&::-webkit-calendar-picker-indicator]:hidden`}
+        />
       </div>
 
       <div>
