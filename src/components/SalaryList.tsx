@@ -1,21 +1,25 @@
-'use client';
+﻿'use client';
 
-import { useState, useEffect } from 'react';
-import { SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
-import { isConfigured } from '@/lib/firebase/config';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { formatCurrency } from '@/lib/employees';
+import { type SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
 
-export default function SalaryList() {
+interface SalaryListProps {
+  onEdit?: (salary: SalaryRecord) => void;
+  refreshToken?: number;
+}
+
+const getCurrentMonthValue = () => new Date().toISOString().slice(0, 7);
+
+export default function SalaryList({ onEdit, refreshToken = 0 }: SalaryListProps) {
   const [salaries, setSalaries] = useState<SalaryRecord[]>([]);
   const [loading, setLoading] = useState(false);
-  const [filterMonth, setFilterMonth] = useState(new Date().toISOString().split('T')[0].slice(0, 7));
+  const [filterMonth, setFilterMonth] = useState(getCurrentMonthValue());
 
   useEffect(() => {
-    if (isConfigured()) {
-      fetchSalaries();
-    }
-  }, []);
+    fetchSalaries();
+  }, [refreshToken]);
 
   const fetchSalaries = async () => {
     setLoading(true);
@@ -23,83 +27,90 @@ export default function SalaryList() {
       const data = await getSalaryRecords();
       setSalaries(data);
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Không thể tải danh sách bảng lương';
+      const message =
+        error instanceof Error ? error.message : 'Không thể tải danh sách bảng lương';
       console.warn(message);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredSalaries = salaries.filter((s) => s.month === filterMonth);
+  const filteredRecords = salaries.filter((salary) => salary.month === filterMonth);
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-4 items-center">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Lọc theo tháng
+    <div className="space-y-8">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="w-full sm:w-auto">
+          <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+            Lọc theo tháng dữ liệu
           </label>
           <input
             type="month"
             value={filterMonth}
             onChange={(e) => setFilterMonth(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-[16px] leading-none text-gray-900 shadow-premium focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/10 transition-all duration-200 sm:w-64"
           />
         </div>
-        <div className="mt-6">
-          <Link
-            href={`/print?month=${filterMonth}`}
-            className="px-6 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700"
-          >
-            In phiếu lương
-          </Link>
-        </div>
+
+        <Link
+          href={`/print?month=${filterMonth}`}
+          className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 font-bold text-white transition-all duration-300 hover:bg-accent-hover"
+        >
+          In phiếu lương hàng loạt
+        </Link>
       </div>
 
       {loading ? (
-        <div className="text-center py-8 text-gray-500">Đang tải...</div>
-      ) : filteredSalaries.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">Không có bảng lương nào cho tháng này</div>
+        <div className="py-20 text-center text-gray-500">Đang tải dữ liệu bảng lương...</div>
+      ) : filteredRecords.length === 0 ? (
+        <div className="rounded-3xl border-2 border-dashed border-gray-100 bg-gray-50/50 py-20 text-center text-gray-400">
+          Không tìm thấy dữ liệu lương cho tháng {filterMonth}
+        </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-100 border border-gray-300">
-                <th className="px-4 py-2 text-left font-semibold">Tên nhân viên</th>
-                <th className="px-4 py-2 text-right font-semibold">Lương cơ bản</th>
-                <th className="px-4 py-2 text-right font-semibold">Phụ cấp</th>
-                <th className="px-4 py-2 text-right font-semibold">Phụ phí</th>
-                <th className="px-4 py-2 text-right font-semibold">Thưởng</th>
-                <th className="px-4 py-2 text-right font-semibold">Khấu trừ</th>
-                <th className="px-4 py-2 text-right font-semibold">Tổng lương</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredSalaries.map((salary) => (
-                <tr key={salary.id} className="border border-gray-300 hover:bg-gray-50">
-                  <td className="px-4 py-2">{salary.employeeName}</td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.baseSalary.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.foodAllowance.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.additionalFees.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.bonus.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {salary.deductions.toLocaleString('vi-VN')} đ
-                  </td>
-                  <td className="px-4 py-2 text-right font-bold text-green-600">
-                    {salary.totalSalary?.toLocaleString('vi-VN')} đ
-                  </td>
+        <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-premium">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-100">
+              <thead>
+                <tr className="bg-gray-50/80">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-900">Nhân viên</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Công ngày</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Công đêm</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Nghỉ</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Lương công</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Tổng phụ cấp</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Tổng bị trừ</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Thực lãnh</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Thao tác</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {filteredRecords.map((salary) => (
+                  <tr key={salary.id} className="transition-colors hover:bg-gray-50/60">
+                    <td className="px-6 py-4">
+                      <p className="font-semibold text-gray-900">{salary.employeeName}</p>
+                      <p className="text-sm text-gray-500">{salary.month}</p>
+                    </td>
+                    <td className="px-6 py-4 text-right text-gray-700">{salary.dayShifts}</td>
+                    <td className="px-6 py-4 text-right text-gray-700">{salary.nightShifts}</td>
+                    <td className="px-6 py-4 text-right text-gray-700">{salary.leaveDays}</td>
+                    <td className="px-6 py-4 text-right text-gray-900">{formatCurrency(salary.grossWorkSalary ?? 0)}</td>
+                    <td className="px-6 py-4 text-right text-blue-600">{formatCurrency(salary.totalAllowance ?? 0)}</td>
+                    <td className="px-6 py-4 text-right text-red-600">{formatCurrency(salary.totalDeduction ?? 0)}</td>
+                    <td className="px-6 py-4 text-right font-bold text-success">{formatCurrency(salary.totalSalary ?? 0)}</td>
+                    <td className="px-6 py-4 text-right">
+                      <button
+                        type="button"
+                        onClick={() => onEdit?.(salary)}
+                        className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-600"
+                      >
+                        Chỉnh sửa
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

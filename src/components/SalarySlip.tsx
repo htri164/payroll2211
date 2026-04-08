@@ -1,6 +1,7 @@
 'use client';
 
-import { SalaryRecord } from '@/lib/firebase/salaries';
+import { type SalaryRecord } from '@/lib/firebase/salaries';
+import { formatCurrency } from '@/lib/employees';
 
 interface SalarySlipProps {
   salary: SalaryRecord;
@@ -13,13 +14,13 @@ export default function SalarySlip({
   companyName = 'CÔNG TY TNHH',
   companyAddress = 'Địa chỉ công ty',
 }: SalarySlipProps) {
-  const formatDate = (monthStr: string) => {
-    const [year, month] = monthStr.split('-');
-    return `Tháng ${parseInt(month)}, năm ${year}`;
+  const formatMonth = (monthValue: string) => {
+    const [year, month] = monthValue.split('-');
+    return `Tháng ${Number(month)}, năm ${year}`;
   };
 
   return (
-    <div className="border-2 border-gray-800 p-4 bg-white text-sm h-[3.8in]">
+    <div className="salary-slip min-h-[3.8in] border-2 border-gray-800 bg-white p-4 text-sm">
       <style>{`
         @media print {
           body { margin: 0; padding: 0; }
@@ -27,38 +28,26 @@ export default function SalarySlip({
         }
       `}</style>
 
-      {/* Header */}
-      <div className="text-center mb-2 border-b-2 border-gray-800 pb-2">
-        <h2 className="font-bold text-base mb-0">{companyName}</h2>
-        <p className="text-xs text-gray-700 m-0">{companyAddress}</p>
+      <div className="mb-2 border-b-2 border-gray-800 pb-2 text-center">
+        <h2 className="mb-0 text-base font-bold">{companyName}</h2>
+        <p className="m-0 text-xs text-gray-700">{companyAddress}</p>
       </div>
 
-      {/* Title */}
-      <div className="text-center mb-2">
-        <h3 className="font-bold text-sm border-b border-gray-400 pb-1">PHIẾU LƯƠNG</h3>
+      <div className="mb-2 text-center">
+        <h3 className="border-b border-gray-400 pb-1 text-sm font-bold">PHIẾU LƯƠNG</h3>
+        <p className="mt-1 text-xs">{formatMonth(salary.month)}</p>
       </div>
 
-      {/* Month */}
-      <div className="text-center mb-2 text-xs">
-        <p className="m-0">{formatDate(salary.month)}</p>
-      </div>
-
-      {/* Employee Info */}
       <div className="mb-2 grid grid-cols-2 gap-2 text-xs">
-        <div>
-          <p className="m-0">
-            <span className="font-semibold">Họ tên:</span> {salary.employeeName}
-          </p>
-        </div>
-        <div>
-          <p className="m-0">
-            <span className="font-semibold">Mã nhân viên:</span> {salary.employeeId}
-          </p>
-        </div>
+        <p className="m-0">
+          <span className="font-semibold">Họ tên:</span> {salary.employeeName}
+        </p>
+        <p className="m-0 text-right">
+          <span className="font-semibold">Mã NV:</span> {salary.employeeId}
+        </p>
       </div>
 
-      {/* Salary Table */}
-      <table className="w-full text-xs border-collapse mb-2">
+      <table className="mb-2 w-full border-collapse text-xs">
         <thead>
           <tr className="border border-gray-600">
             <th className="border border-gray-600 px-1 py-1 text-left font-semibold">Chi tiết</th>
@@ -67,65 +56,99 @@ export default function SalarySlip({
         </thead>
         <tbody>
           <tr className="border border-gray-600">
-            <td className="border border-gray-600 px-1 py-0.5">Lương cơ bản</td>
+            <td className="border border-gray-600 px-1 py-0.5">
+              Lương công ({salary.dayShifts + salary.nightShifts} công)
+            </td>
             <td className="border border-gray-600 px-1 py-0.5 text-right">
-              {salary.baseSalary.toLocaleString('vi-VN')} đ
+              {formatCurrency(salary.grossWorkSalary ?? 0)}
             </td>
           </tr>
           <tr className="border border-gray-600">
-            <td className="border border-gray-600 px-1 py-0.5">Phụ cấp ăn</td>
+            <td className="border border-gray-600 px-1 py-0.5">Phụ cấp cơm</td>
             <td className="border border-gray-600 px-1 py-0.5 text-right">
-              {salary.foodAllowance.toLocaleString('vi-VN')} đ
+              {formatCurrency(salary.foodAllowance)}
             </td>
           </tr>
-          {salary.additionalFees > 0 && (
+          <tr className="border border-gray-600">
+            <td className="border border-gray-600 px-1 py-0.5">Phụ cấp đêm</td>
+            <td className="border border-gray-600 px-1 py-0.5 text-right">
+              {formatCurrency(salary.nightAllowance ?? 0)}
+            </td>
+          </tr>
+          {salary.attendanceBonus > 0 && (
             <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Phụ phí thêm</td>
+              <td className="border border-gray-600 px-1 py-0.5">Phụ cấp chuyên cần</td>
               <td className="border border-gray-600 px-1 py-0.5 text-right">
-                {salary.additionalFees.toLocaleString('vi-VN')} đ
+                {formatCurrency(salary.attendanceBonus)}
               </td>
             </tr>
           )}
-          {salary.bonus > 0 && (
-            <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Thưởng</td>
+          {salary.manualAllowanceLines?.map((line, idx) => (
+            <tr key={`manual-${idx}`} className="border border-gray-600">
+              <td className="border border-gray-600 px-1 py-0.5">{line.label}</td>
               <td className="border border-gray-600 px-1 py-0.5 text-right">
-                {salary.bonus.toLocaleString('vi-VN')} đ
+                {formatCurrency(line.amount)}
+              </td>
+            </tr>
+          ))}
+          {salary.otherAllowance > 0 && (
+            <tr className="border border-gray-600">
+              <td className="border border-gray-600 px-1 py-0.5">Trợ cấp khác</td>
+              <td className="border border-gray-600 px-1 py-0.5 text-right">
+                {formatCurrency(salary.otherAllowance)}
               </td>
             </tr>
           )}
-          {salary.deductions > 0 && (
+          {salary.advancePayment > 0 && (
             <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Khấu trừ</td>
+              <td className="border border-gray-600 px-1 py-0.5">Tạm ứng</td>
               <td className="border border-gray-600 px-1 py-0.5 text-right">
-                -{salary.deductions.toLocaleString('vi-VN')} đ
+                -{formatCurrency(salary.advancePayment)}
               </td>
             </tr>
           )}
+          {salary.otherDeduction > 0 && (
+            <tr className="border border-gray-600">
+              <td className="border border-gray-600 px-1 py-0.5">Khấu trừ khác</td>
+              <td className="border border-gray-600 px-1 py-0.5 text-right">
+                -{formatCurrency(salary.otherDeduction)}
+              </td>
+            </tr>
+          )}
+          <tr className="border border-gray-600 bg-gray-50">
+            <td className="border border-gray-600 px-1 py-0.5 font-semibold">Tổng phụ cấp</td>
+            <td className="border border-gray-600 px-1 py-0.5 text-right font-semibold">
+              {formatCurrency(salary.totalAllowance ?? 0)}
+            </td>
+          </tr>
+          <tr className="border border-gray-600 bg-gray-50">
+            <td className="border border-gray-600 px-1 py-0.5 font-semibold">Tổng bị trừ</td>
+            <td className="border border-gray-600 px-1 py-0.5 text-right font-semibold">
+              -{formatCurrency(salary.totalDeduction ?? 0)}
+            </td>
+          </tr>
           <tr className="border-2 border-gray-700 bg-gray-200">
-            <td className="border-2 border-gray-700 px-1 py-0.5 font-bold">TỔNG LƯƠNG</td>
+            <td className="border-2 border-gray-700 px-1 py-0.5 font-bold">LƯƠNG THỰC LÃNH</td>
             <td className="border-2 border-gray-700 px-1 py-0.5 text-right font-bold">
-              {salary.totalSalary?.toLocaleString('vi-VN')} đ
+              {formatCurrency(salary.totalSalary ?? 0)}
             </td>
           </tr>
         </tbody>
       </table>
 
-      {/* Footer */}
-      <div className="grid grid-cols-3 gap-2 mt-2 text-xs">
+      <div className="grid grid-cols-3 gap-2 text-xs">
         <div className="text-center">
-          <p className="m-0 text-xs border-t border-gray-400 pt-1">Nhân viên HR</p>
+          <p className="m-0 border-t border-gray-400 pt-1">Nhân viên HR</p>
         </div>
         <div className="text-center">
-          <p className="m-0 text-xs border-t border-gray-400 pt-1">Kế toán</p>
+          <p className="m-0 border-t border-gray-400 pt-1">Kế toán</p>
         </div>
         <div className="text-center">
-          <p className="m-0 text-xs border-t border-gray-400 pt-1">Quản lý</p>
+          <p className="m-0 border-t border-gray-400 pt-1">Quản lý</p>
         </div>
       </div>
 
-      {/* Cut line */}
-      <div className="border-t-2 border-dashed border-gray-400 my-2"></div>
+      <div className="my-2 border-t-2 border-dashed border-gray-400"></div>
     </div>
   );
 }

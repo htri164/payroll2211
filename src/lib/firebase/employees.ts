@@ -1,14 +1,12 @@
-import { database, isConfigured } from './config';
 import { ref, push, set, get, update, remove } from 'firebase/database';
+import { database, isConfigured } from './config';
+import {
+  type Employee,
+  createEmployeeDraft,
+  getCurrentDateInputValue,
+} from '@/lib/employees';
 
-export interface Employee {
-  id?: string;
-  name: string;
-  salary: number;
-  foodAllowance: number;
-  position?: string;
-  joinDate?: string;
-}
+export type { Employee } from '@/lib/employees';
 
 const checkFirebaseConfig = () => {
   if (!isConfigured()) {
@@ -18,79 +16,109 @@ const checkFirebaseConfig = () => {
   }
 };
 
-// Add a new employee
+const employeesRef = () => ref(database, 'employees');
+const employeeRef = (id: string) => ref(database, `employees/${id}`);
+
+const normalizeEmployee = (employee: Partial<Employee>): Employee => {
+  const draft = createEmployeeDraft(employee);
+
+  return {
+    ...draft,
+    id: employee.id,
+  };
+};
+
 export const addEmployee = async (employee: Employee) => {
   checkFirebaseConfig();
+
+  const payload = {
+    ...createEmployeeDraft(employee),
+    joinDate: employee.joinDate || getCurrentDateInputValue(),
+  };
+
   try {
-    const newEmployeeRef = push(ref(database, 'employees'));
-    await set(newEmployeeRef, {
-      name: employee.name,
-      salary: employee.salary,
-      foodAllowance: employee.foodAllowance,
-      position: employee.position || '',
-      joinDate: employee.joinDate || new Date().toISOString().split('T')[0],
-    });
-    return { id: newEmployeeRef.key, ...employee };
+    const newEmployeeRef = push(employeesRef());
+    await set(newEmployeeRef, payload);
+
+    return {
+      id: newEmployeeRef.key ?? undefined,
+      ...payload,
+    };
   } catch (error) {
     console.error('Error adding employee:', error);
     throw error;
   }
 };
 
-// Get all employees
 export const getEmployees = async () => {
   checkFirebaseConfig();
+
   try {
-    const snapshot = await get(ref(database, 'employees'));
+    const snapshot = await get(employeesRef());
+
+    if (!snapshot.exists()) {
+      return [];
+    }
+
     const employees: Employee[] = [];
     snapshot.forEach((childSnapshot) => {
-      employees.push({
-        id: childSnapshot.key || '',
-        ...childSnapshot.val(),
-      });
+      employees.push(
+        normalizeEmployee({
+          id: childSnapshot.key ?? undefined,
+          ...childSnapshot.val(),
+        })
+      );
     });
-    return employees;
+
+    return employees.sort((first, second) => first.name.localeCompare(second.name, 'vi'));
   } catch (error) {
     console.error('Error getting employees:', error);
     throw error;
   }
 };
 
-// Get a single employee
 export const getEmployee = async (id: string) => {
   checkFirebaseConfig();
+
   try {
-    const snapshot = await get(ref(database, `employees/${id}`));
-    if (snapshot.exists()) {
-      return {
-        id: id,
-        ...snapshot.val(),
-      };
+    const snapshot = await get(employeeRef(id));
+
+    if (!snapshot.exists()) {
+      return null;
     }
-    return null;
+
+    return normalizeEmployee({
+      id,
+      ...snapshot.val(),
+    });
   } catch (error) {
     console.error('Error getting employee:', error);
     throw error;
   }
 };
 
-// Update employee
 export const updateEmployee = async (id: string, employee: Partial<Employee>) => {
   checkFirebaseConfig();
+
+  const payload = {
+    ...employee,
+    ...(employee.joinDate ? { joinDate: employee.joinDate } : {}),
+  };
+
   try {
-    await update(ref(database, `employees/${id}`), employee);
-    return { id, ...employee };
+    await update(employeeRef(id), payload);
+    return { id, ...payload };
   } catch (error) {
     console.error('Error updating employee:', error);
     throw error;
   }
 };
 
-// Delete employee
 export const deleteEmployee = async (id: string) => {
   checkFirebaseConfig();
+
   try {
-    await remove(ref(database, `employees/${id}`));
+    await remove(employeeRef(id));
   } catch (error) {
     console.error('Error deleting employee:', error);
     throw error;

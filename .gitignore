@@ -42,3 +42,11 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# local service accounts
+*-firebase-adminsdk-*.json
+
+# agent
+.agent/
+.pen/
+/design-system/
