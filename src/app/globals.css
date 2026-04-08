@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Input contrast: make empty inputs look lighter and filled inputs darker */
+#employee-form input {
+  color: #9CA3AF; /* light gray for empty */
+}
+
+#employee-form input.has-value {
+  color: #111827; /* dark text when value present */
+}
+
+#employee-form input::placeholder {
+  color: #9CA3AF;
+}

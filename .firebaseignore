@@ -1,0 +1,12 @@
+# Firebase ignore
+node_modules/
+npm-debug.log
+.DS_Store
+.git/
+.github/
+.env
+.env.local
+.env.*.local
+.next/standalone/.next/cache
+src/
+public/
