@@ -61,13 +61,6 @@
   --shadow-hover: var(--shadow-hover);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-}
-
 /* Premium Layout Helpers */
 .glass-card {
   background: rgba(255, 255, 255, 0.7);
@@ -130,4 +123,65 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   -webkit-appearance: none;
   display: block !important;
+}
+
+/* Tailwind injects :root + prefers-color-scheme: dark (#0a0a0a) after @import "tailwindcss".
+   Keep this app light-only so bg-background and headings stay readable. */
+html {
+  color-scheme: light;
+}
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f8fafc;
+    --foreground: #0f172a;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Print: flex + overflow on main often yields blank preview (Chrome). Reset layout for print. */
+@media print {
+  html,
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  body {
+    display: block !important;
+  }
+
+  body > main {
+    display: block !important;
+    flex: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Lề trang A4 khi in (header/footer trình duyệt tắt riêng trong hộp thoại In) */
+@page {
+  size: A4 portrait;
+  margin: 8mm;
 }

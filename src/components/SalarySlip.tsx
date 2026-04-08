@@ -1,154 +1,92 @@
 'use client';
 
 import { type SalaryRecord } from '@/lib/firebase/salaries';
-import { formatCurrency } from '@/lib/employees';
 
 interface SalarySlipProps {
   salary: SalaryRecord;
-  companyName?: string;
-  companyAddress?: string;
+  joinDateDisplay?: string;
 }
 
-export default function SalarySlip({
-  salary,
-  companyName = 'CÔNG TY TNHH',
-  companyAddress = 'Địa chỉ công ty',
-}: SalarySlipProps) {
-  const formatMonth = (monthValue: string) => {
-    const [year, month] = monthValue.split('-');
-    return `Tháng ${Number(month)}, năm ${year}`;
-  };
+/** Số thường (cộng / trung tính): không kèm “đ”. */
+const slipNum = (value: number, emptyDash = true) => {
+  if (value === 0 && emptyDash) return '—';
+  return value.toLocaleString('vi-VN');
+};
+
+/** Khoản trừ: 0 → —, còn lại luôn có dấu - trước số. */
+const slipDeduction = (value: number) => {
+  if (value === 0) return '—';
+  return `-${value.toLocaleString('vi-VN')}`;
+};
+
+/** Dòng phụ cấp thủ công: âm thì hiển thị trừ. */
+const slipManualAmount = (value: number) => {
+  if (value === 0) return '—';
+  if (value < 0) return `-${Math.abs(value).toLocaleString('vi-VN')}`;
+  return value.toLocaleString('vi-VN');
+};
+
+const formatMonthYm = (monthValue: string) => {
+  const [y, m] = monthValue.split('-');
+  if (!y || !m) return monthValue;
+  return `Tháng ${m}/${y}`;
+};
+
+export default function SalarySlip({ salary, joinDateDisplay }: SalarySlipProps) {
+  const gross = salary.grossWorkSalary ?? 0;
+  const night = salary.nightAllowance ?? 0;
+  const net = salary.totalSalary ?? 0;
 
   return (
-    <div className="salary-slip min-h-[3.8in] border-2 border-gray-800 bg-white p-4 text-sm">
-      <style>{`
-        @media print {
-          body { margin: 0; padding: 0; }
-          .salary-slip { page-break-after: avoid; }
-        }
-      `}</style>
-
-      <div className="mb-2 border-b-2 border-gray-800 pb-2 text-center">
-        <h2 className="mb-0 text-base font-bold">{companyName}</h2>
-        <p className="m-0 text-xs text-gray-700">{companyAddress}</p>
-      </div>
-
-      <div className="mb-2 text-center">
-        <h3 className="border-b border-gray-400 pb-1 text-sm font-bold">PHIẾU LƯƠNG</h3>
-        <p className="mt-1 text-xs">{formatMonth(salary.month)}</p>
-      </div>
-
-      <div className="mb-2 grid grid-cols-2 gap-2 text-xs">
-        <p className="m-0">
-          <span className="font-semibold">Họ tên:</span> {salary.employeeName}
-        </p>
-        <p className="m-0 text-right">
-          <span className="font-semibold">Mã NV:</span> {salary.employeeId}
+    <div className="salary-slip flex h-full min-h-0 flex-col border border-gray-800 bg-white p-2.5 text-[11px] leading-snug print:border-gray-900 print:p-[2mm] print:text-[8pt] print:leading-[1.25] sm:text-xs">
+      <div className="mb-1.5 shrink-0 text-center print:mb-1">
+        <h2 className="text-xs font-bold uppercase tracking-tight print:text-[9pt]">
+          PHIẾU LƯƠNG CÁ NHÂN
+        </h2>
+        <p className="mt-0.5 text-[11px] text-gray-800 print:text-[8pt] print:text-gray-900">
+          {formatMonthYm(salary.month)}
         </p>
       </div>
 
-      <table className="mb-2 w-full border-collapse text-xs">
-        <thead>
-          <tr className="border border-gray-600">
-            <th className="border border-gray-600 px-1 py-1 text-left font-semibold">Chi tiết</th>
-            <th className="border border-gray-600 px-1 py-1 text-right font-semibold">Số tiền</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="border border-gray-600">
-            <td className="border border-gray-600 px-1 py-0.5">
-              Lương công ({salary.dayShifts + salary.nightShifts} công)
-            </td>
-            <td className="border border-gray-600 px-1 py-0.5 text-right">
-              {formatCurrency(salary.grossWorkSalary ?? 0)}
-            </td>
-          </tr>
-          <tr className="border border-gray-600">
-            <td className="border border-gray-600 px-1 py-0.5">Phụ cấp cơm</td>
-            <td className="border border-gray-600 px-1 py-0.5 text-right">
-              {formatCurrency(salary.foodAllowance)}
-            </td>
-          </tr>
-          <tr className="border border-gray-600">
-            <td className="border border-gray-600 px-1 py-0.5">Phụ cấp đêm</td>
-            <td className="border border-gray-600 px-1 py-0.5 text-right">
-              {formatCurrency(salary.nightAllowance ?? 0)}
-            </td>
-          </tr>
-          {salary.attendanceBonus > 0 && (
-            <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Phụ cấp chuyên cần</td>
-              <td className="border border-gray-600 px-1 py-0.5 text-right">
-                {formatCurrency(salary.attendanceBonus)}
-              </td>
-            </tr>
-          )}
+      <div className="mb-1.5 flex shrink-0 justify-between gap-2 border-b border-gray-500 pb-1 print:mb-1 print:pb-0.5">
+        <span className="font-medium">Họ tên</span>
+        <span className="max-w-[60%] text-right font-semibold">{salary.employeeName}</span>
+      </div>
+
+      {/* flex-1 + mt-auto: đẩy “III Tiền lương thực lãnh” sát đáy ô phiếu, khoảng trắng nằm giữa danh sách và dòng tổng */}
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="flex shrink-0 flex-col gap-0">
+          <SlipRow label="Ngày vào làm" value={joinDateDisplay?.trim() || '—'} />
+          <SlipRow label="Lương cơ bản" value={slipNum(salary.baseSalary, false)} />
+          <SlipRow label="Ngày công" value={slipNum(salary.dayShifts, false)} />
+          <SlipRow label="Ngày nghỉ" value={slipNum(salary.leaveDays)} />
+          <SlipRow label="Ngày làm đêm" value={slipNum(salary.nightShifts)} />
+          <SlipRow label="Tổng lương" value={slipNum(gross, false)} />
+          <SlipRow label="Phụ cấp làm đêm" value={slipNum(night, false)} />
+          <SlipRow label="Phụ cấp cơm" value={slipNum(salary.foodAllowance, false)} />
+          <SlipRow label="Tiền chuyên cần" value={slipNum(salary.attendanceBonus)} />
+          <SlipRow label="Phụ cấp trọ" value={slipNum(salary.otherAllowance)} />
           {salary.manualAllowanceLines?.map((line, idx) => (
-            <tr key={`manual-${idx}`} className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">{line.label}</td>
-              <td className="border border-gray-600 px-1 py-0.5 text-right">
-                {formatCurrency(line.amount)}
-              </td>
-            </tr>
+            <SlipRow key={`m-${idx}`} label={line.label} value={slipManualAmount(line.amount)} />
           ))}
-          {salary.otherAllowance > 0 && (
-            <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Trợ cấp khác</td>
-              <td className="border border-gray-600 px-1 py-0.5 text-right">
-                {formatCurrency(salary.otherAllowance)}
-              </td>
-            </tr>
-          )}
-          {salary.advancePayment > 0 && (
-            <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Tạm ứng</td>
-              <td className="border border-gray-600 px-1 py-0.5 text-right">
-                -{formatCurrency(salary.advancePayment)}
-              </td>
-            </tr>
-          )}
-          {salary.otherDeduction > 0 && (
-            <tr className="border border-gray-600">
-              <td className="border border-gray-600 px-1 py-0.5">Khấu trừ khác</td>
-              <td className="border border-gray-600 px-1 py-0.5 text-right">
-                -{formatCurrency(salary.otherDeduction)}
-              </td>
-            </tr>
-          )}
-          <tr className="border border-gray-600 bg-gray-50">
-            <td className="border border-gray-600 px-1 py-0.5 font-semibold">Tổng phụ cấp</td>
-            <td className="border border-gray-600 px-1 py-0.5 text-right font-semibold">
-              {formatCurrency(salary.totalAllowance ?? 0)}
-            </td>
-          </tr>
-          <tr className="border border-gray-600 bg-gray-50">
-            <td className="border border-gray-600 px-1 py-0.5 font-semibold">Tổng bị trừ</td>
-            <td className="border border-gray-600 px-1 py-0.5 text-right font-semibold">
-              -{formatCurrency(salary.totalDeduction ?? 0)}
-            </td>
-          </tr>
-          <tr className="border-2 border-gray-700 bg-gray-200">
-            <td className="border-2 border-gray-700 px-1 py-0.5 font-bold">LƯƠNG THỰC LÃNH</td>
-            <td className="border-2 border-gray-700 px-1 py-0.5 text-right font-bold">
-              {formatCurrency(salary.totalSalary ?? 0)}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <SlipRow label="Tạm ứng" value={slipDeduction(salary.advancePayment)} />
+          <SlipRow label="Khấu trừ khác" value={slipDeduction(salary.otherDeduction)} />
+        </div>
 
-      <div className="grid grid-cols-3 gap-2 text-xs">
-        <div className="text-center">
-          <p className="m-0 border-t border-gray-400 pt-1">Nhân viên HR</p>
-        </div>
-        <div className="text-center">
-          <p className="m-0 border-t border-gray-400 pt-1">Kế toán</p>
-        </div>
-        <div className="text-center">
-          <p className="m-0 border-t border-gray-400 pt-1">Quản lý</p>
+        <div className="mt-auto flex justify-between gap-2 border-t-2 border-gray-900 pt-1.5 text-xs font-bold print:pt-1 print:text-[8.5pt]">
+          <span>III Tiền lương thực lãnh</span>
+          <span className="tabular-nums">{slipNum(net, false)}</span>
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="my-2 border-t-2 border-dashed border-gray-400"></div>
+function SlipRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="slip-row flex justify-between gap-1 border-b border-gray-200 py-0.5 print:py-[0.15rem] print:text-[8pt]">
+      <span className="shrink-0 text-gray-900">{label}</span>
+      <span className="min-w-0 text-right tabular-nums text-gray-900">{value}</span>
     </div>
   );
 }

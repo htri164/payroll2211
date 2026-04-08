@@ -35,7 +35,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background flex">
         <Navigation />
-        <main className="flex-1 lg:pl-64 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto lg:pl-64 print:pl-0">
           <ClientLayout>
             {children}
           </ClientLayout>

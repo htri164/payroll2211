@@ -41,7 +41,7 @@ export default function Navigation() {
   return (
     <>
       {/* Mobile Top Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 h-16 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:hidden">
+      <header className="fixed top-0 left-0 right-0 z-40 h-16 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:hidden print:hidden">
         <Link href="/" className="flex items-center gap-2">
           <span className="bg-primary text-white p-1.5 rounded-lg">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ export default function Navigation() {
       </header>
 
       {/* Desktop Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 hidden lg:flex flex-col">
+      <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 hidden lg:flex flex-col print:hidden">
         <div className="p-8">
           <Link href="/" className="flex items-center gap-3 group">
             <span className="bg-primary text-white p-2 rounded-xl group-hover:bg-primary-hover transition-all duration-300 shadow-lg shadow-primary/20">
