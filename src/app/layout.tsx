@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Payroll Management System",
   description: "Hệ thống quản lý tính lương nhân viên",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
