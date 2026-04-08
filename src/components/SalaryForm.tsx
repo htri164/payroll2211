@@ -313,7 +313,10 @@ export default function SalaryForm({
     }
   };
 
-  const noAvailableEmployee = !isEditing && availableEmployees.length === 0;
+  /** Dropdown trống: hoặc chưa có NV trong hệ thống, hoặc mọi NV đã có bảng lương tháng này — tách 2 trường hợp. */
+  const noEmployeesInSystem = !isEditing && employees.length === 0;
+  const allHaveSalaryForMonth =
+    !isEditing && employees.length > 0 && availableEmployees.length === 0;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -351,7 +354,13 @@ export default function SalaryForm({
                 </option>
               ))}
             </select>
-            {noAvailableEmployee && (
+            {noEmployeesInSystem && (
+              <p className="mt-2 text-sm text-gray-600">
+                Chưa có nhân viên trong hệ thống. Hãy thêm nhân viên ở mục <span className="font-semibold">Nhân viên</span> trước khi
+                tính lương.
+              </p>
+            )}
+            {allHaveSalaryForMonth && (
               <p className="mt-2 text-sm text-amber-700">
                 Tất cả nhân viên đã được tạo bảng lương trong tháng này. Muốn sửa, hãy bấm Chỉnh sửa ở danh sách bên dưới.
               </p>

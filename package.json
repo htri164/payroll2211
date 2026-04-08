@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "build:functions": "cd functions && npm run build",
-    "deploy:firebase": "npm run build && npm run build:functions && firebase deploy"
+    "deploy:firebase": "npm run build && npm run build:functions && firebase deploy",
+    "db:clear": "node scripts/clear-rtdb.mjs",
+    "db:clear:cli": "npx --yes firebase-tools@13 database:remove / --force --project payroll-92871"
   },
   "dependencies": {
     "firebase": "^12.11.0",
