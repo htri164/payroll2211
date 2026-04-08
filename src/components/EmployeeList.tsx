@@ -80,6 +80,8 @@ export default function EmployeeList({ onRefresh }: EmployeeListProps) {
                   <th className="px-4 py-2 text-left font-semibold text-gray-900">Tên</th>
                   <th className="px-4 py-2 text-right font-semibold text-gray-900">Lương cơ bản</th>
                   <th className="px-4 py-2 text-right font-semibold text-gray-900">Phụ cấp ăn</th>
+                  <th className="px-4 py-2 text-left font-semibold text-gray-900">Ngày làm việc</th>
+                  <th className="px-4 py-2 text-left font-semibold text-gray-900">Xưởng</th>
                   <th className="px-4 py-2 text-center font-semibold text-gray-900">Hành động</th>
                 </tr>
               </thead>
@@ -91,6 +93,10 @@ export default function EmployeeList({ onRefresh }: EmployeeListProps) {
                     <td className="px-4 py-2 text-right text-gray-900">
                       {emp.foodAllowance.toLocaleString('vi-VN')} đ
                     </td>
+                    <td className="px-4 py-2 text-gray-900">
+                      {emp.joinDate ? new Date(emp.joinDate).toLocaleDateString('vi-VN') : ''}
+                    </td>
+                    <td className="px-4 py-2 text-gray-900">{emp.factory || ''}</td>
                     <td className="px-4 py-2 text-center">
                       <button
                         onClick={() => setEditingId(emp.id || null)}

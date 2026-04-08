@@ -28,9 +28,10 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
     foodAllowance: employee?.foodAllowance || 0,
     position: employee?.position || '',
     joinDate: employee?.joinDate || new Date().toISOString().split('T')[0],
+    factory: employee?.factory || 'Xưởng 1',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     // Update form data
@@ -49,7 +50,7 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
     }
 
     // Toggle visual class so we can style empty vs filled inputs
-    const target = e.target as HTMLInputElement;
+    const target = e.target as HTMLInputElement | HTMLSelectElement;
     const isNumberField = name === 'salary' || name === 'foodAllowance';
     const hasValue = isNumberField ? target.value !== '' && target.value !== '0' : target.value !== '';
     target.classList.toggle('has-value', !!hasValue);
@@ -93,6 +94,7 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
           foodAllowance: 0,
           position: '',
           joinDate: new Date().toISOString().split('T')[0],
+          factory: 'Xưởng 1',
         });
       }
       onSuccess?.();
@@ -163,7 +165,7 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Ngày bắt đầu
+            Ngày làm việc
           </label>
           <input
             type="date"
@@ -172,6 +174,21 @@ export default function EmployeeForm({ employee, onSuccess }: EmployeeFormProps)
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Xưởng
+          </label>
+          <select
+            name="factory"
+            value={formData.factory}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Xưởng 1">Xưởng 1</option>
+            <option value="Xưởng 2">Xưởng 2</option>
+          </select>
         </div>
       </div>
 

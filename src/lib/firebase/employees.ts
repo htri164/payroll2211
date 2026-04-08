@@ -8,6 +8,7 @@ export interface Employee {
   foodAllowance: number;
   position?: string;
   joinDate?: string;
+  factory?: 'Xưởng 1' | 'Xưởng 2';
 }
 
 const checkFirebaseConfig = () => {
@@ -29,6 +30,7 @@ export const addEmployee = async (employee: Employee) => {
       foodAllowance: employee.foodAllowance,
       position: employee.position || '',
       joinDate: employee.joinDate || new Date().toISOString().split('T')[0],
+      factory: employee.factory || 'Xưởng 1',
     });
     return { id: newEmployeeRef.key, ...employee };
   } catch (error) {
