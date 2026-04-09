@@ -67,6 +67,9 @@ const initialFormState: SalaryFormState = {
 const fieldClassName =
   'h-12 w-full rounded-xl border border-gray-200 bg-white px-4 py-2 text-base leading-none text-gray-900 focus:border-success focus:outline-none focus:ring-4 focus:ring-success/10 transition-all duration-300';
 
+const readOnlyFieldClassName =
+  'h-12 w-full rounded-xl border border-gray-100 bg-gray-50 px-4 py-2 text-base leading-none text-gray-400 cursor-not-allowed select-none transition-all duration-300';
+
 const mapRecordToFormState = (record: SalaryRecord): SalaryFormState => ({
   dayShifts: record.dayShifts,
   nightShifts: record.nightShifts,
@@ -341,30 +344,35 @@ export default function SalaryForm({
           )}
 
           <div>
-            <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+            <label className={`mb-1.5 ml-1 block text-sm font-semibold ${isEditing ? 'text-gray-400' : 'text-gray-700'}`}>
               Nhân viên *
             </label>
-            <div className="relative">
-              <select
-                onChange={handleChangeSelect}
-                value={selectedEmployee?.id || ''}
-                className={fieldClassName + ' appearance-none pr-10'}
-                disabled={isEditing}
-                required
-              >
-                <option value="">-- Chọn nhân viên --</option>
-                {availableEmployees.map((employee) => (
-                  <option key={employee.id} value={employee.id}>
-                    {employee.name}
-                  </option>
-                ))}
-              </select>
-              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
-            </div>
+            {isEditing ? (
+              <div className={readOnlyFieldClassName + ' flex items-center'}>
+                {selectedEmployee?.name ?? '--'}
+              </div>
+            ) : (
+              <div className="relative">
+                <select
+                  onChange={handleChangeSelect}
+                  value={selectedEmployee?.id || ''}
+                  className={fieldClassName + ' appearance-none pr-10'}
+                  required
+                >
+                  <option value="">-- Chọn nhân viên --</option>
+                  {availableEmployees.map((employee) => (
+                    <option key={employee.id} value={employee.id}>
+                      {employee.name}
+                    </option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </span>
+              </div>
+            )}
             {noEmployeesInSystem && (
               <p className="mt-2 text-sm text-gray-600">
                 Chưa có nhân viên trong hệ thống. Hãy thêm nhân viên ở mục <span className="font-semibold">Nhân viên</span> trước khi
@@ -379,33 +387,38 @@ export default function SalaryForm({
           </div>
 
           <div>
-            <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+            <label className={`mb-1.5 ml-1 block text-sm font-semibold ${isEditing ? 'text-gray-400' : 'text-gray-700'}`}>
               Tháng *
             </label>
-            <input
-              type="month"
-              value={month}
-              onChange={(e) => setMonth(e.target.value)}
-              className={fieldClassName}
-              disabled={isEditing}
-              required
-            />
+            {isEditing ? (
+              <div className={readOnlyFieldClassName + ' flex items-center'}>
+                {month}
+              </div>
+            ) : (
+              <input
+                type="month"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+                className={fieldClassName}
+                required
+              />
+            )}
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+              <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-400">
                 Lương cơ bản
               </label>
-              <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 font-semibold text-gray-900">
+              <div className="flex h-12 items-center rounded-xl border border-gray-100 bg-gray-50 px-4 text-base font-semibold text-gray-400 cursor-not-allowed">
                 {salaryPreview ? formatCurrency(salaryPreview.baseSalary) : '--'}
               </div>
             </div>
             <div>
-              <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+              <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-400">
                 Tiền ăn
               </label>
-              <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 font-semibold text-gray-900">
+              <div className="flex h-12 items-center rounded-xl border border-gray-100 bg-gray-50 px-4 text-base font-semibold text-gray-400 cursor-not-allowed">
                 {salaryPreview ? formatCurrency(salaryPreview.foodAllowance) : '--'}
               </div>
             </div>
