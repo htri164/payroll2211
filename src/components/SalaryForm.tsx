@@ -147,7 +147,7 @@ export default function SalaryForm({
       setEmployees(data);
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'KhÃ´ng thá»ƒ táº£i danh sÃ¡ch nhÃ¢n viÃªn';
+        error instanceof Error ? error.message : 'Không thể tải danh sách nhân viên';
       console.warn(message);
     }
   };
@@ -158,7 +158,7 @@ export default function SalaryForm({
       setMonthRecords(data);
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'KhÃ´ng thá»ƒ táº£i báº£ng lÆ°Æ¡ng theo thÃ¡ng';
+        error instanceof Error ? error.message : 'Không thể tải bảng lương theo tháng';
       console.warn(message);
       setMonthRecords([]);
     }
@@ -283,7 +283,7 @@ export default function SalaryForm({
     e.preventDefault();
 
     if (!selectedEmployee?.id || !salaryPreview) {
-      toast.error('Vui lÃ²ng chá»n nhÃ¢n viÃªn');
+      toast.error('Vui lòng chọn nhân viên');
       return;
     }
 
@@ -291,7 +291,7 @@ export default function SalaryForm({
       !isEditing &&
       monthRecords.some((record) => record.employeeId === selectedEmployee.id)
     ) {
-      toast.error('NhÃ¢n viÃªn nÃ y Ä‘Ã£ cÃ³ báº£ng lÆ°Æ¡ng trong thÃ¡ng Ä‘Ã£ chá»n');
+      toast.error('Nhân viên này đã có bảng lương trong tháng đã chọn');
       return;
     }
 
@@ -300,24 +300,24 @@ export default function SalaryForm({
     try {
       if (isEditing && editingRecord?.id) {
         await updateSalaryRecord(editingRecord.id, salaryPreview);
-        toast.success('Cáº­p nháº­t báº£ng lÆ°Æ¡ng thÃ nh cÃ´ng');
+        toast.success('Cập nhật bảng lương thành công');
         onCancelEdit?.();
       } else {
         await addSalaryRecord(salaryPreview);
-        toast.success('TÃ­nh lÆ°Æ¡ng thÃ nh cÃ´ng');
+        toast.success('Tính lương thành công');
         resetCreateForm();
       }
 
       onSuccess?.();
     } catch (error) {
-      toast.error('CÃ³ lá»—i xáº£y ra khi lÆ°u báº£ng lÆ°Æ¡ng');
+      toast.error('Có lỗi xảy ra khi lưu bảng lương');
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-  /** Dropdown trá»‘ng: hoáº·c chÆ°a cÃ³ NV trong há»‡ thá»‘ng, hoáº·c má»i NV Ä‘Ã£ cÃ³ báº£ng lÆ°Æ¡ng thÃ¡ng nÃ y â€” tÃ¡ch 2 trÆ°á»ng há»£p. */
+  /** Dropdown trống: hoặc chưa có NV trong hệ thống, hoặc mọi NV đã có bảng lương tháng này — tách 2 trường hợp. */
   const noEmployeesInSystem = !isEditing && employees.length === 0;
   const allHaveSalaryForMonth =
     !isEditing && employees.length > 0 && availableEmployees.length === 0;
@@ -327,7 +327,7 @@ export default function SalaryForm({
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <section className="space-y-4 rounded-2xl border border-gray-100 bg-gray-50/70 p-6">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">1. ThÃ´ng tin cÆ¡ báº£n</h3>
+            <h3 className="text-lg font-bold text-gray-900">1. Thông tin cơ bản</h3>
             <p className="mt-1 text-sm text-gray-500">
               Chọn nhân viên và tháng tính lương. Lương cơ bản lấy từ hồ sơ, tiền ăn tự tính theo tổng ngày công x 40.000.
             </p>
@@ -407,17 +407,17 @@ export default function SalaryForm({
 
         <section className="space-y-4 rounded-2xl border border-gray-100 bg-gray-50/70 p-6">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">2. Cháº¥m cÃ´ng</h3>
+            <h3 className="text-lg font-bold text-gray-900">2. Chấm công</h3>
             <p className="mt-1 text-sm text-gray-500">
               Tiền ăn được tính tự động theo tổng công (ngày + đêm) x {formatCurrency(FOOD_ALLOWANCE_PER_WORKING_DAY)}. Phụ cấp đêm được tính theo công đêm x {formatCurrency(NIGHT_SHIFT_ALLOWANCE)}. Ô số dùng dấu
-              <span className="font-semibold">.</span> phÃ¢n cÃ¡ch hÃ ng nghÃ¬n; khi trá»‘ng tÆ°Æ¡ng Ä‘Æ°Æ¡ng 0.
+              <span className="font-semibold">.</span> phân cách hàng nghìn; khi trống tương đương 0.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                Sá»‘ cÃ´ng ngÃ y
+                Số công ngày
               </label>
               <input
                 type="text"
@@ -433,7 +433,7 @@ export default function SalaryForm({
             </div>
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                Sá»‘ cÃ´ng Ä‘Ãªm
+                Số công đêm
               </label>
               <input
                 type="text"
@@ -449,7 +449,7 @@ export default function SalaryForm({
             </div>
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                Sá»‘ ngÃ y nghá»‰
+                Số ngày nghỉ
               </label>
               <input
                 type="text"
@@ -465,26 +465,42 @@ export default function SalaryForm({
             </div>
           </div>
 
-          <div className="rounded-xl border border-amber-100 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-            Tiền ăn hiện tại: <span className="font-bold">{formatCurrency(salaryPreview?.foodAllowance ?? 0)}</span>{' '}
-            <span className="text-amber-700">({formData.dayShifts + formData.nightShifts} công x {formatCurrency(FOOD_ALLOWANCE_PER_WORKING_DAY)})</span>
-            <span className="mx-2 text-amber-300">•</span>
-            Phụ cấp đêm: <span className="font-bold">{formatCurrency(salaryPreview?.nightAllowance ?? 0)}</span>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-amber-100 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              <p>
+                Tiền ăn hiện tại:{' '}
+                <span className="font-bold">{formatCurrency(salaryPreview?.foodAllowance ?? 0)}</span>
+              </p>
+              <p className="mt-1 text-amber-700">
+                {formData.dayShifts + formData.nightShifts} công x{' '}
+                {formatCurrency(FOOD_ALLOWANCE_PER_WORKING_DAY)}
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-3 text-sm text-indigo-800">
+              <p>
+                Phụ cấp đêm:{' '}
+                <span className="font-bold">{formatCurrency(salaryPreview?.nightAllowance ?? 0)}</span>
+              </p>
+              <p className="mt-1 text-indigo-700">
+                {formData.nightShifts} công đêm x {formatCurrency(NIGHT_SHIFT_ALLOWANCE)}
+              </p>
+            </div>
           </div>
         </section>
 
         <section className="space-y-4 rounded-2xl border border-gray-100 bg-gray-50/70 p-6 lg:col-span-2">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">3. ThÃªm / Trá»«</h3>
+            <h3 className="text-lg font-bold text-gray-900">3. Thêm / Trừ</h3>
             <p className="mt-1 text-sm text-gray-500">
-              Nháº­p cÃ¡c khoáº£n phÃ¡t sinh thá»±c táº¿ trong thÃ¡ng. Pháº§n â€œKhoáº£n cá»™ng thÃªm (tá»± nháº­p)â€ dÃ¹ng khi cáº§n nhiá»u dÃ²ng cÃ³ tÃªn riÃªng (vÃ­ dá»¥ trá»±c CN, mua Ä‘á»“). ChuyÃªn cáº§n váº«n nháº­p má»™t Ã´ riÃªng.
+              Nhập các khoản phát sinh thực tế trong tháng. Phần &quot;Khoản cộng thêm (tự nhập)&quot; dùng khi cần nhiều dòng có tên riêng (ví dụ trực CN, mua đồ). Chuyên cần vẫn nhập một ô riêng.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                Táº¡m á»©ng
+                Tạm ứng
               </label>
               <input
                 type="text"
@@ -500,7 +516,7 @@ export default function SalaryForm({
             </div>
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                ChuyÃªn cáº§n
+                Chuyên cần
               </label>
               <input
                 type="text"
@@ -516,7 +532,7 @@ export default function SalaryForm({
             </div>
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                Trá»£ cáº¥p khÃ¡c (má»™t sá»‘)
+                Trợ cấp khác (một số)
               </label>
               <input
                 type="text"
@@ -532,7 +548,7 @@ export default function SalaryForm({
             </div>
             <div>
               <label className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
-                Kháº¥u trá»« khÃ¡c
+                Khấu trừ khác
               </label>
               <input
                 type="text"
@@ -551,9 +567,9 @@ export default function SalaryForm({
           <div className="rounded-xl border border-success/20 bg-white p-4">
             <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-bold text-gray-900">Khoáº£n cá»™ng thÃªm (tá»± nháº­p)</p>
+                <p className="text-sm font-bold text-gray-900">Khoản cộng thêm (tự nhập)</p>
                 <p className="text-xs text-gray-500">
-                  Má»—i dÃ²ng: tÃªn khoáº£n + sá»‘ tiá»n. Chá»‰ tÃ­nh dÃ²ng cÃ³ tÃªn. Tá»‘i Ä‘a {MAX_MANUAL_ALLOWANCE_LINES} dÃ²ng.
+                  Mỗi dòng: tên khoản + số tiền. Chỉ tính dòng có tên. Tối đa {MAX_MANUAL_ALLOWANCE_LINES} dòng.
                 </p>
               </div>
               <button
@@ -562,7 +578,7 @@ export default function SalaryForm({
                 disabled={formData.manualAllowanceLines.length >= MAX_MANUAL_ALLOWANCE_LINES}
                 className="mt-2 shrink-0 rounded-lg border border-success bg-success/5 px-4 py-2 text-sm font-semibold text-success transition hover:bg-success/10 disabled:cursor-not-allowed disabled:opacity-50 sm:mt-0"
               >
-                + ThÃªm dÃ²ng
+                + Thêm dòng
               </button>
             </div>
             <div className="space-y-3">
@@ -573,20 +589,20 @@ export default function SalaryForm({
                 >
                   <div className="min-w-0 flex-1">
                     <label className="mb-1 ml-1 block text-xs font-semibold text-gray-600">
-                      TÃªn khoáº£n
+                      Tên khoản
                     </label>
                     <input
                       type="text"
                       value={line.label}
                       onChange={(e) => handleManualLineLabelChange(index, e.target.value)}
-                      placeholder="VÃ­ dá»¥: trá»±c CN, cÃ¢n Ä‘iá»uâ€¦"
+                      placeholder="Ví dụ: trực CN, cân điều…"
                       className={fieldClassName}
                       maxLength={80}
                     />
                   </div>
                   <div className="w-full sm:w-44">
                     <label className="mb-1 ml-1 block text-xs font-semibold text-gray-600">
-                      Sá»‘ tiá»n
+                      Số tiền
                     </label>
                     <input
                       type="text"
@@ -603,16 +619,16 @@ export default function SalaryForm({
                     type="button"
                     onClick={() => removeManualLine(index)}
                     className="h-12 shrink-0 rounded-xl border border-gray-200 px-4 text-sm font-semibold text-gray-600 transition hover:bg-gray-50"
-                    aria-label="XÃ³a dÃ²ng"
+                    aria-label="Xóa dòng"
                   >
-                    XÃ³a
+                    Xóa
                   </button>
                 </div>
               ))}
             </div>
             {salaryPreview && (salaryPreview.manualAllowanceTotal ?? 0) !== 0 && (
               <p className="mt-3 text-sm font-semibold text-success">
-                Tá»•ng cÃ¡c khoáº£n tá»± nháº­p: {formatCurrency(salaryPreview.manualAllowanceTotal ?? 0)}
+                Tổng các khoản tự nhập: {formatCurrency(salaryPreview.manualAllowanceTotal ?? 0)}
               </p>
             )}
           </div>
@@ -624,67 +640,67 @@ export default function SalaryForm({
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-success">
-                4. Tá»•ng káº¿t Ä‘á»™ng
+                4. Tổng kết động
               </p>
               <h3 className="text-2xl font-black text-gray-900">
-                LÆ°Æ¡ng thá»±c lÃ£nh Ä‘Æ°á»£c cáº­p nháº­t ngay khi báº¡n nháº­p
+                Lương thực lãnh được cập nhật ngay khi bạn nhập
               </h3>
             </div>
             <div className="rounded-2xl bg-white px-5 py-4 text-right shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">LÆ°Æ¡ng thá»±c lÃ£nh</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Lương thực lãnh</p>
               <p className="text-3xl font-black text-success">{formatCurrency(salaryPreview.totalSalary ?? 0)}</p>
             </div>
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">LÆ°Æ¡ng cÃ´ng</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Lương công</p>
               <p className="mt-2 text-2xl font-black text-gray-900">{formatCurrency(salaryPreview.grossWorkSalary ?? 0)}</p>
               <p className="mt-2 text-sm text-gray-500">
-                {formData.dayShifts + formData.nightShifts} cÃ´ng / {STANDARD_WORKING_DAYS} ngÃ y chuáº©n
+                {formData.dayShifts + formData.nightShifts} công / {STANDARD_WORKING_DAYS} ngày chuẩn
               </p>
             </div>
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Tá»•ng phá»¥ cáº¥p</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Tổng phụ cấp</p>
               <p className="mt-2 text-2xl font-black text-gray-900">{formatCurrency(salaryPreview.totalAllowance ?? 0)}</p>
-              <p className="mt-2 text-sm text-gray-500">CÆ¡m + Ä‘Ãªm + chuyÃªn cáº§n + trá»£ cáº¥p + khoáº£n tá»± nháº­p</p>
+              <p className="mt-2 text-sm text-gray-500">Cơm + đêm + chuyên cần + trợ cấp + khoản tự nhập</p>
             </div>
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Tá»•ng bá»‹ trá»«</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Tổng bị trừ</p>
               <p className="mt-2 text-2xl font-black text-red-600">{formatCurrency(salaryPreview.totalDeduction ?? 0)}</p>
-              <p className="mt-2 text-sm text-gray-500">Táº¡m á»©ng + kháº¥u trá»« khÃ¡c</p>
+              <p className="mt-2 text-sm text-gray-500">Tạm ứng + khấu trừ khác</p>
             </div>
             <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Nghá»‰ / Phá»¥ cáº¥p Ä‘Ãªm</p>
-              <p className="mt-2 text-2xl font-black text-gray-900">{formData.leaveDays} ngÃ y</p>
-              <p className="mt-2 text-sm text-gray-500">ÄÃªm: {formatCurrency(salaryPreview.nightAllowance ?? 0)}</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Nghỉ / Phụ cấp đêm</p>
+              <p className="mt-2 text-2xl font-black text-gray-900">{formData.leaveDays} ngày</p>
+              <p className="mt-2 text-sm text-gray-500">Đêm: {formatCurrency(salaryPreview.nightAllowance ?? 0)}</p>
             </div>
           </div>
 
           <div className="mt-6 overflow-hidden rounded-2xl border border-success/10 bg-white">
             <div className="grid grid-cols-1 divide-y divide-gray-100 text-sm md:grid-cols-2 md:divide-x md:divide-y-0">
               <div className="space-y-3 p-5">
-                <p className="font-bold text-gray-900">Chi tiáº¿t cÃ´ng vÃ  phá»¥ cáº¥p</p>
+                <p className="font-bold text-gray-900">Chi tiết công và phụ cấp</p>
                 <div className="flex items-center justify-between text-gray-600">
                   <span>Tiền ăn</span>
                   <span className="font-semibold text-gray-900">{formatCurrency(salaryPreview.foodAllowance)}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>Phá»¥ cáº¥p Ä‘Ãªm</span>
+                  <span>Phụ cấp đêm</span>
                   <span className="font-semibold text-gray-900">{formatCurrency(salaryPreview.nightAllowance ?? 0)}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>ChuyÃªn cáº§n</span>
+                  <span>Chuyên cần</span>
                   <span className="font-semibold text-gray-900">{formatCurrency(formData.attendanceBonus)}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>Trá»£ cáº¥p khÃ¡c (má»™t sá»‘)</span>
+                  <span>Trợ cấp khác (một số)</span>
                   <span className="font-semibold text-gray-900">{formatCurrency(formData.otherAllowance)}</span>
                 </div>
                 {(salaryPreview.manualAllowanceLines?.length ?? 0) > 0 && (
                     <div className="border-t border-gray-100 pt-2">
                       <p className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-500">
-                        Khoáº£n tá»± nháº­p
+                        Khoản tự nhập
                       </p>
                       {salaryPreview.manualAllowanceLines?.map((line, i) => (
                         <div key={i} className="flex items-center justify-between text-gray-600">
@@ -695,7 +711,7 @@ export default function SalaryForm({
                         </div>
                       ))}
                       <div className="mt-2 flex items-center justify-between border-t border-dashed border-gray-200 pt-2 text-gray-700">
-                        <span className="font-medium">Tá»•ng khoáº£n tá»± nháº­p</span>
+                        <span className="font-medium">Tổng khoản tự nhập</span>
                         <span className="font-bold text-success">
                           {formatCurrency(salaryPreview.manualAllowanceTotal ?? 0)}
                         </span>
@@ -704,21 +720,21 @@ export default function SalaryForm({
                   )}
               </div>
               <div className="space-y-3 p-5">
-                <p className="font-bold text-gray-900">Chi tiáº¿t trá»«</p>
+                <p className="font-bold text-gray-900">Chi tiết trừ</p>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>Táº¡m á»©ng</span>
+                  <span>Tạm ứng</span>
                   <span className="font-semibold text-gray-900">{formatCurrency(formData.advancePayment)}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>Kháº¥u trá»« khÃ¡c</span>
+                  <span>Khấu trừ khác</span>
                   <span className="font-semibold text-gray-900">{formatCurrency(formData.otherDeduction)}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>NgÃ y cÃ´ng quy Ä‘á»•i</span>
+                  <span>Ngày công quy đổi</span>
                   <span className="font-semibold text-gray-900">{formData.dayShifts + formData.nightShifts}</span>
                 </div>
                 <div className="flex items-center justify-between text-gray-600">
-                  <span>NgÃ y cÃ´ng chuáº©n</span>
+                  <span>Ngày công chuẩn</span>
                   <span className="font-semibold text-gray-900">{STANDARD_WORKING_DAYS}</span>
                 </div>
               </div>
@@ -735,9 +751,9 @@ export default function SalaryForm({
         >
           {loading
             ? isEditing
-              ? 'Äang cáº­p nháº­t báº£ng lÆ°Æ¡ng...'
-              : 'Äang lÆ°u báº£ng lÆ°Æ¡ng...'
-            : 'XÃ¡c nháº­n tÃ­nh lÆ°Æ¡ng'}
+              ? 'Đang cập nhật bảng lương...'
+              : 'Đang lưu bảng lương...'
+            : 'Xác nhận tính lương'}
         </button>
 
         {isEditing && (
@@ -746,13 +762,12 @@ export default function SalaryForm({
             onClick={handleCancelEdit}
             className="w-full rounded-xl border border-gray-200 bg-white px-10 py-4 font-bold text-gray-700 transition-all duration-300 hover:bg-gray-50 sm:w-auto"
           >
-            Há»§y chá»‰nh sá»­a
+            Hủy chỉnh sửa
           </button>
         )}
       </div>
     </form>
   );
 }
-
 
 
