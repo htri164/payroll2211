@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-background p-4 lg:p-10 font-sans">
+    <main className="min-h-screen bg-background p-4 pt-20 lg:p-10 font-sans">
       <div className="w-full">
         <header className="mb-12">
           <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight leading-none">
@@ -53,7 +53,7 @@ export default function Home() {
         </header>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="group bg-white p-8 rounded-3xl border border-gray-100 shadow-premium hover:shadow-hover transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
             <div className="flex flex-col gap-4">
@@ -84,7 +84,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="group bg-white p-8 rounded-3xl border border-gray-100 shadow-premium hover:shadow-hover transition-all duration-300 relative overflow-hidden col-span-1 md:col-span-2">
+          <div className="group bg-white p-8 rounded-3xl border border-gray-100 shadow-premium hover:shadow-hover transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-110"></div>
             <div className="flex flex-col gap-4">
               <div className="w-12 h-12 bg-accent-light text-accent rounded-2xl flex items-center justify-center">
@@ -158,7 +158,7 @@ export default function Home() {
               Xuất dữ liệu và in phiếu lương hàng loạt theo tháng. Tối ưu hóa 4 phiếu trên mỗi trang A4.
             </p>
             <Link
-              href="/salary"
+              href="/print"
               className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-xl hover:bg-accent-hover transition-all w-full justify-center group"
             >
               <span>Xem bảng in</span>

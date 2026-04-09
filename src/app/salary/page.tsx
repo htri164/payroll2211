@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import SalaryForm from '@/components/SalaryForm';
@@ -25,7 +25,7 @@ export default function SalaryPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background p-4 lg:p-10">
+    <main className="min-h-screen bg-background p-4 pt-20 lg:p-10">
       <div className="w-full">
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">

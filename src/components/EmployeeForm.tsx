@@ -80,7 +80,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
         setJoinDateText(isoDateToDdMmYyyy(next.joinDate));
       }
 
-      toast.success('Cập nhật thành công');
+      toast.success(employee?.id ? 'Cập nhật thành công' : 'Thêm nhân viên thành công');
       onSuccess?.();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Có lỗi xảy ra. Vui lòng thử lại');
@@ -93,7 +93,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="employee-name" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+      <label htmlFor="employee-name" className="mb-1.5 block text-sm font-semibold text-gray-700">
           Tên nhân viên *
         </label>
         <input
@@ -109,7 +109,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
       </div>
 
       <div>
-        <label htmlFor="employee-salary" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+        <label htmlFor="employee-salary" className="mb-1.5 block text-sm font-semibold text-gray-700">
           Lương cơ bản (VND) *
         </label>
         <input
@@ -126,7 +126,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
       </div>
 
       <div>
-        <label htmlFor="employee-join-date" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+        <label htmlFor="employee-join-date" className="mb-1.5 block text-sm font-semibold text-gray-700">
           Ngày làm việc
         </label>
         <input
@@ -164,7 +164,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
       </div>
 
       <div>
-        <label htmlFor="employee-factory" className="mb-1.5 ml-1 block text-sm font-semibold text-gray-700">
+        <label htmlFor="employee-factory" className="mb-1.5 block text-sm font-semibold text-gray-700">
           Xưởng
         </label>
         <div className="relative">
@@ -210,7 +210,7 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
               Đang cập nhật...
             </>
           ) : (
-            'Cập nhật'
+            employee?.id ? 'Cập nhật' : 'Thêm nhân viên'
           )}
         </button>
         {employee?.id && onCancel && (

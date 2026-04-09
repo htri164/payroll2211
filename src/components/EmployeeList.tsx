@@ -30,6 +30,7 @@ export default function EmployeeList({
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isConfigured()) {
@@ -61,15 +62,7 @@ export default function EmployeeList({
     return employees.filter((emp) => removeAccents(emp.name).includes(normalizedQuery));
   }, [employees, searchQuery]);
 
-  const handleDelete = async (id?: string) => {
-    if (!id) {
-      return;
-    }
-
-    if (!window.confirm('Bạn chắc chắn muốn xóa nhân viên này?')) {
-      return;
-    }
-
+  const handleDelete = async (id: string) => {
     try {
       await deleteEmployee(id);
       setEmployees((current) => current.filter((employee) => employee.id !== id));
@@ -81,6 +74,8 @@ export default function EmployeeList({
     } catch (error) {
       toast.error('Lỗi xóa nhân viên');
       console.error(error);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -146,14 +141,17 @@ export default function EmployeeList({
             <p className="mt-4 font-medium font-sans text-gray-500">Đang tải danh sách...</p>
           </div>
         ) : filteredEmployees.length === 0 ? (
-          <div className="rounded-3xl border-2 border-dashed border-gray-100 bg-white py-20 text-center">
-            <p className="text-lg font-medium text-gray-400">
+          <div className="rounded-3xl border-2 border-dashed border-gray-200 bg-white py-20 text-center">
+            <svg className="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <p className="mt-4 text-base font-medium text-gray-500">
               {searchQuery ? 'Không tìm thấy kết quả phù hợp' : 'Chưa có nhân viên nào trong hệ thống'}
             </p>
           </div>
         ) : (
           <div className="overflow-x-auto rounded-3xl border border-gray-100 bg-white shadow-premium">
-            <table className="min-w-[780px] w-full table-auto border-collapse">
+            <table className="min-w-[780px] w-full table-auto">
               <colgroup>
                 <col className="w-[30%]" />
                 <col className="w-[20%]" />
@@ -162,46 +160,70 @@ export default function EmployeeList({
                 <col className="w-[20%]" />
               </colgroup>
               <thead>
-                <tr className="bg-gray-100 text-sm">
-                  <th className="px-5 py-4 text-left font-semibold text-gray-900">Tên</th>
-                  <th className="px-5 py-4 text-right font-semibold text-gray-900">Lương cơ bản</th>
-                  <th className="px-5 py-4 text-left font-semibold text-gray-900">Ngày làm việc</th>
-                  <th className="px-5 py-4 text-left font-semibold text-gray-900">Xưởng</th>
-                  <th className="px-5 py-4 text-center font-semibold text-gray-900">Hành động</th>
+                <tr className="bg-gray-50/80">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Tên</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Lương cơ bản</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Ngày làm việc</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Xưởng</th>
+                  <th className="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-500">Hành động</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {filteredEmployees.map((employee) => (
                   <tr
                     key={employee.id}
-                    className={`border-t border-gray-200 align-middle hover:bg-gray-50 ${
+                    className={`align-middle transition-colors hover:bg-gray-50 ${
                       employee.id === selectedEmployeeId ? 'bg-primary/5 ring-1 ring-inset ring-primary/20' : ''
                     }`}
                   >
-                    <td className="px-5 py-4 text-gray-900">{employee.name}</td>
-                    <td className="whitespace-nowrap px-5 py-4 text-right text-gray-900">
+                    <td className="px-6 py-4 font-medium text-gray-900">{employee.name}</td>
+                    <td className="whitespace-nowrap px-6 py-4 text-right text-gray-700">
                       {formatCurrency(employee.salary)}
                     </td>
-                    <td className="whitespace-nowrap px-5 py-4 text-gray-900">
+                    <td className="whitespace-nowrap px-6 py-4 text-gray-700">
                       {formatDate(employee.joinDate)}
                     </td>
-                    <td className="whitespace-nowrap px-5 py-4 text-gray-900">{employee.factory}</td>
-                    <td className="px-5 py-4">
+                    <td className="whitespace-nowrap px-6 py-4 text-gray-700">{employee.factory}</td>
+                    <td className="px-6 py-4">
                       <div className="flex items-center justify-center gap-2 whitespace-nowrap">
-                        <button
-                          type="button"
-                          onClick={() => employee.id && onSelectEmployee?.(employee)}
-                          className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600"
-                        >
-                          Sửa
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => void handleDelete(employee.id)}
-                          className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
-                        >
-                          Xóa
-                        </button>
+                        {deletingId === employee.id ? (
+                          <>
+                            <span className="text-sm text-gray-500">Xác nhận xóa?</span>
+                            <button
+                              type="button"
+                              onClick={() => employee.id && void handleDelete(employee.id)}
+                              className="rounded-xl bg-red-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-red-600"
+                            >
+                              Xóa
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setDeletingId(null)}
+                              className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-300 hover:bg-gray-50"
+                            >
+                              Hủy
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => employee.id && onSelectEmployee?.(employee)}
+                              className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-primary-hover"
+                              aria-label={`Sửa nhân viên ${employee.name}`}
+                            >
+                              Sửa
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setDeletingId(employee.id ?? null)}
+                              className="rounded-xl border border-red-200 bg-white px-4 py-2 text-sm font-semibold text-red-600 transition-all duration-300 hover:bg-red-50"
+                              aria-label={`Xóa nhân viên ${employee.name}`}
+                            >
+                              Xóa
+                            </button>
+                          </>
+                        )}
                       </div>
                     </td>
                   </tr>

@@ -38,7 +38,7 @@ export default function SalarySlip({ salary, joinDateDisplay }: SalarySlipProps)
   const net = salary.totalSalary ?? 0;
 
   return (
-    <div className="salary-slip flex h-full min-h-0 flex-col border border-gray-800 bg-white p-2.5 text-[11px] leading-snug print:border-gray-900 print:p-[2mm] print:text-[8pt] print:leading-[1.25] sm:text-xs">
+    <div className="salary-slip flex h-full min-h-0 flex-col border border-gray-800 bg-white p-2.5 text-xs leading-snug print:border-gray-900 print:p-[2mm] print:text-[8pt] print:leading-[1.25]">
       <div className="mb-1.5 shrink-0 text-center print:mb-1">
         <h2 className="text-xs font-bold uppercase tracking-tight print:text-[9pt]">
           PHIẾU LƯƠNG CÁ NHÂN

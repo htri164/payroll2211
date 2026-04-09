@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -63,8 +63,13 @@ export default function SalaryList({ onEdit, refreshToken = 0 }: SalaryListProps
       {loading ? (
         <div className="py-20 text-center text-gray-500">Đang tải dữ liệu bảng lương...</div>
       ) : filteredRecords.length === 0 ? (
-        <div className="rounded-3xl border-2 border-dashed border-gray-100 bg-gray-50/50 py-20 text-center text-gray-400">
+        <div className="rounded-3xl border-2 border-dashed border-gray-200 bg-gray-50/50 py-20 text-center">
+          <svg className="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          <p className="mt-4 text-base font-medium text-gray-500">
           Không tìm thấy dữ liệu lương cho tháng {filterMonth}
+          </p>
         </div>
       ) : (
         <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-premium">
@@ -72,15 +77,15 @@ export default function SalaryList({ onEdit, refreshToken = 0 }: SalaryListProps
             <table className="min-w-full divide-y divide-gray-100">
               <thead>
                 <tr className="bg-gray-50/80">
-                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-900">Nhân viên</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Công ngày</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Công đêm</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Nghỉ</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Lương công</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Tổng phụ cấp</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Tổng bị trừ</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Thực lãnh</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-900">Thao tác</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Nhân viên</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Công ngày</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Công đêm</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Nghỉ</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Lương công</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Tổng phụ cấp</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Tổng bị trừ</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Thực lãnh</th>
+                  <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Thao tác</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -101,7 +106,7 @@ export default function SalaryList({ onEdit, refreshToken = 0 }: SalaryListProps
                       <button
                         type="button"
                         onClick={() => onEdit?.(salary)}
-                        className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-600"
+                        className="rounded-xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-amber-600"
                       >
                         Chỉnh sửa
                       </button>

@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { isConfigured } from '@/lib/firebase/config';
 import FirebaseSetupGuide from './FirebaseSetupGuide';
 import { useEffect, useState } from 'react';
@@ -9,6 +10,9 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isPrintRoute = pathname.startsWith('/print');
+
   const [configured, setConfigured] = useState(false);
   const [checked, setChecked] = useState(false);
 
@@ -25,5 +29,9 @@ export default function ClientLayout({
     return <FirebaseSetupGuide />;
   }
 
-  return <>{children}</>;
+  return (
+    <div className={isPrintRoute ? '' : 'lg:pl-64'}>
+      {children}
+    </div>
+  );
 }

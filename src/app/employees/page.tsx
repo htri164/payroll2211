@@ -19,7 +19,7 @@ export default function EmployeesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background p-4 lg:p-10">
+    <main className="min-h-screen bg-background p-4 pt-20 lg:p-10">
       <div className="w-full">
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
