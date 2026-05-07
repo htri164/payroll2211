@@ -1,2 +1,2163 @@
-⚠ Fast Refresh had to perform a full reload when ./src/app/employees/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/app/employees/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[browser] ./src/components/SalaryForm.tsx:460:19
+Expected '</', got 'jsx text'
+  458 |             </div>
+  459 |           </div>
+> 460 |         </section>
+      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 461 |
+      | ^
+> 462 |         <section className="space-y-4 rounded-2xl border border-gray-100 bg-gray-50/70 p-6">
+      | ^^^^^^^^
+  463 |           <div>
+  464 |             <h3 className="text-lg font-bold text-gray-900">2. Chấm công</h3>
+  465 |             <p className="mt-1 text-sm text-gray-500">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:460:19
+Expected '</', got 'jsx text'
+  458 |             </div>
+  459 |           </div>
+> 460 |         </section>
+      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 461 |
+      | ^
+> 462 |         <section className="space-y-4 rounded-2xl border border-gray-100 bg-gray-50/70 p-6">
+      | ^^^^^^^^
+  463 |           <div>
+  464 |             <h3 className="text-lg font-bold text-gray-900">2. Chấm công</h3>
+  465 |             <p className="mt-1 text-sm text-gray-500">
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+⚠ Fast Refresh had to perform a full reload when ./src/lib/employees.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+⚠ Fast Refresh had to perform a full reload when ./src/lib/employees.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mEmployeeForm[0m [36mfrom[0m [32m'@/components/EmployeeForm'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mEmployeeList[0m [36mfrom[0m [32m'@/components/EmployeeList'[0m;
+  [90m6 |[0m [36mimport[0m [36mtype[0m { [33mEmployee[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/employees/page.tsx:4:1
+Module not found: Can't resolve '@/components/EmployeeForm'
+  2 |
+  3 | import { useState } from 'react';
+> 4 | import EmployeeForm from '@/components/EmployeeForm';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import EmployeeList from '@/components/EmployeeList';
+  6 | import type { Employee } from '@/lib/employees';
+  7 |
+
+Import map: aliased to relative './src/components/EmployeeForm' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/employees/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/employees/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught ReferenceError: monthPickerRef is not defined
+    at SalaryForm (src/components/SalaryForm.tsx:375:14)
+    at SalaryPage (src/app/salary/page.tsx:45:13)
+  373 |     <form onSubmit={handleSubmit} className="space-y-8">
+  374 |       <input
+> 375 |         ref={monthPickerRef}
+      |              ^
+  376 |         type="month"
+  377 |         value={month}
+  378 |         onChange={(e) => {
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Uncaught ReferenceError: monthPickerRef is not defined
+    at SalaryForm (src/components/SalaryForm.tsx:363:14)
+    at SalaryPage (src/app/salary/page.tsx:45:13)
+  361 |     <form onSubmit={handleSubmit} className="space-y-8">
+  362 |       <input
+> 363 |         ref={monthPickerRef}
+      |              ^
+  364 |         type="month"
+  365 |         value={month}
+  366 |         onChange={(e) => {
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Uncaught ReferenceError: openMonthPicker is not defined
+    at SalaryForm (src/app/salary/page.tsx:32:54)
+    at SalaryPage (src/app/salary/page.tsx:10:25)
+  30 | ...eader className="mb-10">
+  31 | ...<h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
+> 32 | ...  Tính Toán <span className="text-success">Lương Thưởng</span>
+     |                                             ^
+  33 | ...</h1>
+  34 | ...<p className="mt-2 text-gray-500">
+  35 | ...  Tính lương theo công ngày, công đêm, tạm ứng và các khoản phụ cấp, khấu trừ phát sinh...
+[browser] ./src/components/SalaryForm.tsx:444:17
+Expected '</', got '{'
+  442 |                   }}
+  443 |                 />
+> 444 |                 {false && (
+      |                 ^
+  445 |                   <input
+  446 |                     type="text"
+  447 |                     inputMode="numeric"
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:445:21
+Expected '</', got 'type'
+  443 |                 />
+  444 |                   <button
+> 445 |                     type="button"
+      |                     ^^^^
+  446 |                     onClick={openMonthPicker}
+  447 |                     className="absolute right-0 top-0 flex h-12 w-12 items-center justify...
+  448 |                     aria-label="Chọn tháng tính lương"
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:444:17
+Expected '</', got '{'
+  442 |                   }}
+  443 |                 />
+> 444 |                 {false && (
+      |                 ^
+  445 |                   <button
+  446 |                     type="button"
+  447 |                     onClick={openMonthPicker}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:444:17
+Expected '</', got '{'
+  442 |                   }}
+  443 |                 />
+> 444 |                 {false && (
+      |                 ^
+  445 |                   <button
+  446 |                     type="button"
+  447 |                     onClick={openMonthPicker}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:444:21
+Expected '</', got 'ident'
+  442 |                   }}
+  443 |                 />
+> 444 |                     aria-label="Chọn tháng tính lương"
+      |                     ^^^^
+  445 |                   >
+  446 |                     <svg
+  447 |                       className="block h-5 w-5"
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:444:21
+Expected '</', got 'ident'
+  442 |                   }}
+  443 |                 />
+> 444 |                     aria-label="Chọn tháng tính lương"
+      |                     ^^^^
+  445 |               )}
+  446 |             </div>
+  447 |           </div>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Uncaught ReferenceError: openFilterMonthPicker is not defined
+    at SalaryList (src/components/SalaryList.tsx:82:24)
+    at Set.forEach (<anonymous>)
+    at SalaryPage (src/app/salary/page.tsx:61:59)
+  80 |             <button
+  81 |               type="button"
+> 82 |               onClick={openFilterMonthPicker}
+     |                        ^
+  83 |               className="absolute right-0 top-0 flex h-12 w-12 items-center justify-center...
+  84 |               aria-label="Chọn tháng lọc dữ liệu"
+  85 |             >
+[browser] ./src/components/SalaryList.tsx:94:15
+Expected '</', got 'type'
+  92 |             />
+  93 |             <button
+> 94 |               type="button"
+     |               ^^^^
+  95 |               onClick={openFilterMonthPicker}
+  96 |               className="absolute right-0 top-0 flex h-12 w-12 items-center justify-center...
+  97 |               aria-label="Chọn tháng lọc dữ liệu"
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryList.tsx:109:7
+Expected ',', got '{'
+  107 |       </div>
+  108 |
+> 109 |       {loading ? (
+      |       ^
+  110 |         <div className="py-20 text-center text-gray-500">Đang tải dữ liệu bảng lương...</...
+  111 |       ) : filteredRecords.length === 0 ? (
+  112 |         <div className="rounded-3xl border-2 border-dashed border-gray-200 bg-gray-50/50 ...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryList.tsx:83:13
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
+  81 |           />
+  82 |               aria-label="Chọn tháng lọc dữ liệu"
+> 83 |             >
+     |             ^
+  84 |               <svg
+  85 |                 className="block h-5 w-5"
+  86 |                 fill="none"
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m16 |[0m } [36mfrom[0m [32m'@/lib/employees'[0m;
+  [90m17 |[0m [36mimport[0m { addEmployee, updateEmployee } [36mfrom[0m [32m'@/lib/firebase/employees'[0m;
+[31m[1m>[0m [90m18 |[0m [36mimport[0m { [33mDatePickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m19 |[0m
+  [90m20 |[0m [36minterface[0m [33mEmployeeFormProps[0m {
+  [90m21 |[0m   employee?: [33mEmployee[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m26 |[0m } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m27 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m28 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m29 |[0m
+  [90m30 |[0m [36minterface[0m [33mSalaryFormProps[0m {
+  [90m31 |[0m   editingRecord?: [33mSalaryRecord[0m | [36mnull[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  [90m11 |[0m [36mimport[0m { [36mtype[0m [33mSalaryRecord[0m, getSalaryRecords } [36mfrom[0m [32m'@/lib/firebase/salaries'[0m;
+  [90m12 |[0m [36mimport[0m toast [36mfrom[0m [32m'react-hot-toast'[0m;
+[31m[1m>[0m [90m13 |[0m [36mimport[0m { [33mMonthPickerField[0m } [36mfrom[0m [32m'./DateTimePickerField'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m14 |[0m
+  [90m15 |[0m [36minterface[0m [33mSalaryListProps[0m {
+  [90m16 |[0m   onEdit?: (salary: [33mSalaryRecord[0m) => [36mvoid[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  26 | } from '@/lib/firebase/salaries';
+  27 | import toast from 'react-hot-toast';
+> 28 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  29 |
+  30 | interface SalaryFormProps {
+  31 |   editingRecord?: SalaryRecord | null;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/components/SalaryForm.tsx:28:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/components/SalaryForm.tsx:28:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  26 | } from '@/lib/firebase/salaries';
+  27 | import toast from 'react-hot-toast';
+> 28 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  29 |
+  30 | interface SalaryFormProps {
+  31 |   editingRecord?: SalaryRecord | null;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  11 | import { type SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
+  12 | import toast from 'react-hot-toast';
+> 13 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | interface SalaryListProps {
+  16 |   onEdit?: (salary: SalaryRecord) => void;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  16 | } from '@/lib/employees';
+  17 | import { addEmployee, updateEmployee } from '@/lib/firebase/employees';
+> 18 | import { DatePickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | interface EmployeeFormProps {
+  21 |   employee?: Employee;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  26 | } from '@/lib/firebase/salaries';
+  27 | import toast from 'react-hot-toast';
+> 28 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  29 |
+  30 | interface SalaryFormProps {
+  31 |   editingRecord?: SalaryRecord | null;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  11 | import { type SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
+  12 | import toast from 'react-hot-toast';
+> 13 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | interface SalaryListProps {
+  16 |   onEdit?: (salary: SalaryRecord) => void;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  16 | } from '@/lib/employees';
+  17 | import { addEmployee, updateEmployee } from '@/lib/firebase/employees';
+> 18 | import { DatePickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | interface EmployeeFormProps {
+  21 |   employee?: Employee;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/SalaryForm.tsx:28:1
+Module not found: Can't resolve './DateTimePickerField'
+  26 | } from '@/lib/firebase/salaries';
+  27 | import toast from 'react-hot-toast';
+> 28 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  29 |
+  30 | interface SalaryFormProps {
+  31 |   editingRecord?: SalaryRecord | null;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/SalaryList.tsx:13:1
+Module not found: Can't resolve './DateTimePickerField'
+  11 | import { type SalaryRecord, getSalaryRecords } from '@/lib/firebase/salaries';
+  12 | import toast from 'react-hot-toast';
+> 13 | import { MonthPickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | interface SalaryListProps {
+  16 |   onEdit?: (salary: SalaryRecord) => void;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/EmployeeForm.tsx:18:1
+Module not found: Can't resolve './DateTimePickerField'
+  16 | } from '@/lib/employees';
+  17 | import { addEmployee, updateEmployee } from '@/lib/firebase/employees';
+> 18 | import { DatePickerField } from './DateTimePickerField';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | interface EmployeeFormProps {
+  21 |   employee?: Employee;
+
+Import traces:
+  Client Component Browser:
+    ./src/components/EmployeeForm.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Client Component Browser]
+    ./src/app/employees/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/EmployeeForm.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Client Component SSR]
+    ./src/app/employees/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/SalaryList.tsx:137:7
+Expected '</', got ')'
+  135 |                     </td>
+  136 |         </div>
+> 137 |       )}
+      |       ^
+  138 |     </div>
+  139 |   );
+  140 | }
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryList.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryList.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+⚠ Fast Refresh had to perform a full reload when ./src/lib/firebase/salaries.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[browser] ./src/components/SalaryForm.tsx:33:11
+Expected ';', got 'ident'
+  31 |   editingRecord?: SalaryRecord | null;
+  32 |
+> 33 | interface SalaryFormProps {
+     |           ^^^^^^^^^^^^^^^
+  34 |   editingRecord?: SalaryRecord | null;
+  35 |   refreshToken?: number;
+  36 |   onCancelEdit?: () => void;
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+[browser] ./src/components/SalaryForm.tsx:718:19
+Expected '</', got 'jsx text'
+  716 |               </div>
+  717 |             )}
+> 718 |         </section>
+      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 719 |       </div>
+      | ^^^^^^
+  720 |
+  721 |       {salaryPreview && (
+  722 |         <section className="rounded-3xl border border-success/10 bg-success-light p-8 sha...
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/SalaryForm.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Client Component Browser]
+    ./src/app/salary/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/SalaryForm.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Client Component SSR]
+    ./src/app/salary/page.tsx [Server Component] 
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[browser] Uncaught ReferenceError: isLeaveDaysModified is not defined
+    at SalaryForm (src/components/SalaryForm.tsx:299:29)
+    at Set.forEach (<anonymous>)
+    at SalaryPage (src/app/salary/page.tsx:46:30)
+  297 |       }
+  298 |     }
+> 299 |   }, [totalShifts, maxDays, isLeaveDaysModified, selectedEmployee, formData.leaveDays]);
+      |                             ^
+  300 |
+  301 |   const salaryPreview: SalaryRecord | null = selectedEmployee
+  302 |     ? buildSalaryRecord({
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
