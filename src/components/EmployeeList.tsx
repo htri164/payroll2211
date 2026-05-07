@@ -4,7 +4,12 @@ import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { isConfigured } from '@/lib/firebase/config';
 import { deleteEmployee, getEmployees } from '@/lib/firebase/employees';
-import { formatCurrency, formatDate, type Employee } from '@/lib/employees';
+import {
+  formatCurrency,
+  formatDate,
+  getWorkScheduleLabel,
+  type Employee,
+} from '@/lib/employees';
 
 interface EmployeeListProps {
   onRefresh?: () => void;
@@ -151,13 +156,14 @@ export default function EmployeeList({
           </div>
         ) : (
           <div className="overflow-x-auto rounded-3xl border border-gray-100 bg-white shadow-premium">
-            <table className="min-w-[780px] w-full table-auto">
+            <table className="min-w-[920px] w-full table-auto">
               <colgroup>
-                <col className="w-[30%]" />
-                <col className="w-[20%]" />
+                <col className="w-[24%]" />
                 <col className="w-[18%]" />
+                <col className="w-[16%]" />
                 <col className="w-[12%]" />
-                <col className="w-[20%]" />
+                <col className="w-[14%]" />
+                <col className="w-[16%]" />
               </colgroup>
               <thead>
                 <tr className="bg-gray-50/80">
@@ -165,6 +171,7 @@ export default function EmployeeList({
                   <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-gray-500">Lương cơ bản</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Ngày làm việc</th>
                   <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Xưởng</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Chế độ làm việc</th>
                   <th className="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-500">Hành động</th>
                 </tr>
               </thead>
@@ -184,6 +191,9 @@ export default function EmployeeList({
                       {formatDate(employee.joinDate)}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-gray-700">{employee.factory}</td>
+                    <td className="whitespace-nowrap px-6 py-4 text-gray-700">
+                      {getWorkScheduleLabel(employee.workSchedule)}
+                    </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-center gap-2 whitespace-nowrap">
                         {deletingId === employee.id ? (
@@ -209,7 +219,7 @@ export default function EmployeeList({
                             <button
                               type="button"
                               onClick={() => employee.id && onSelectEmployee?.(employee)}
-                              className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-primary-hover"
+                              className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent-hover"
                               aria-label={`Sửa nhân viên ${employee.name}`}
                             >
                               Sửa

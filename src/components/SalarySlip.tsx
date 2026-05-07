@@ -1,5 +1,6 @@
 'use client';
 
+import { getWorkScheduleLabel } from '@/lib/employees';
 import { type SalaryRecord } from '@/lib/firebase/salaries';
 
 interface SalarySlipProps {
@@ -58,6 +59,8 @@ export default function SalarySlip({ salary, joinDateDisplay }: SalarySlipProps)
         <div className="flex shrink-0 flex-col gap-0">
           <SlipRow label="Ngày vào làm" value={joinDateDisplay?.trim() || '—'} />
           <SlipRow label="Lương cơ bản" value={slipNum(salary.baseSalary, false)} />
+          <SlipRow label="Chế độ làm việc" value={getWorkScheduleLabel(salary.workSchedule)} />
+          <SlipRow label="Định mức tháng" value={slipNum(salary.standardWorkingDays, false)} />
           <SlipRow label="Ngày công" value={slipNum(salary.dayShifts, false)} />
           <SlipRow label="Ngày nghỉ" value={slipNum(salary.leaveDays)} />
           <SlipRow label="Ngày làm đêm" value={slipNum(salary.nightShifts)} />
@@ -65,12 +68,11 @@ export default function SalarySlip({ salary, joinDateDisplay }: SalarySlipProps)
           <SlipRow label="Phụ cấp làm đêm" value={slipNum(night, false)} />
           <SlipRow label="Tiền ăn" value={slipNum(salary.foodAllowance, false)} />
           <SlipRow label="Tiền chuyên cần" value={slipNum(salary.attendanceBonus)} />
-          <SlipRow label="Phụ cấp trọ" value={slipNum(salary.otherAllowance)} />
+          <SlipRow label="Nhà trọ" value={slipNum(salary.otherAllowance)} />
           {salary.manualAllowanceLines?.map((line, idx) => (
             <SlipRow key={`m-${idx}`} label={line.label} value={slipManualAmount(line.amount)} />
           ))}
           <SlipRow label="Tạm ứng" value={slipDeduction(salary.advancePayment)} />
-          <SlipRow label="Khấu trừ khác" value={slipDeduction(salary.otherDeduction)} />
         </div>
 
         <div className="mt-auto flex justify-between gap-2 border-t-2 border-gray-900 pt-1.5 text-xs font-bold print:pt-1 print:text-[8.5pt]">

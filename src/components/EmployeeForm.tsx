@@ -6,13 +6,16 @@ import {
   type Employee,
   createEmployeeDraft,
   FACTORIES,
+  WORK_SCHEDULES,
   formatNumberInput,
   getCurrentDateInputValue,
   isoDateToDdMmYyyy,
   normalizeJoinDateToIso,
+  normalizeWorkSchedule,
   parseFormattedNumber,
 } from '@/lib/employees';
 import { addEmployee, updateEmployee } from '@/lib/firebase/employees';
+import { DatePickerField } from './DateTimePickerField';
 
 interface EmployeeFormProps {
   employee?: Employee;
@@ -47,8 +50,33 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
 
     setFormData((current) => ({
       ...current,
-      [name]: name === 'salary' ? parseFormattedNumber(value) : value,
+      [name]:
+        name === 'salary'
+          ? parseFormattedNumber(value)
+          : name === 'workSchedule'
+            ? normalizeWorkSchedule(value)
+            : value,
     }));
+  };
+
+  const commitJoinDateText = () => {
+    const trimmed = joinDateText.trim();
+    if (!trimmed) {
+      const today = getCurrentDateInputValue();
+      setFormData((current) => ({ ...current, joinDate: today }));
+      setJoinDateText(isoDateToDdMmYyyy(today));
+      return;
+    }
+
+    const normalized = normalizeJoinDateToIso(trimmed);
+    if (normalized) {
+      setFormData((current) => ({ ...current, joinDate: normalized }));
+      setJoinDateText(isoDateToDdMmYyyy(normalized));
+      return;
+    }
+
+    toast.error('Ngày không hợp lệ. Dùng dd/mm/yyyy (ví dụ 08/04/2026)');
+    setJoinDateText(isoDateToDdMmYyyy(formData.joinDate));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -91,9 +119,9 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div>
-      <label htmlFor="employee-name" className="mb-1.5 block text-sm font-semibold text-gray-700">
+        <label htmlFor="employee-name" className="mb-1.5 block text-sm font-semibold text-gray-700">
           Tên nhân viên *
         </label>
         <input
@@ -129,38 +157,20 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
         <label htmlFor="employee-join-date" className="mb-1.5 block text-sm font-semibold text-gray-700">
           Ngày làm việc
         </label>
-        <input
+        <DatePickerField
           id="employee-join-date"
-          type="text"
-          name="joinDateDisplay"
-          lang="vi"
-          inputMode="numeric"
-          autoComplete="off"
-          placeholder="dd/mm/yyyy"
           value={joinDateText}
-          onChange={(e) => setJoinDateText(e.target.value)}
-          onBlur={() => {
-            const t = joinDateText.trim();
-            if (!t) {
-              const today = getCurrentDateInputValue();
-              setFormData((c) => ({ ...c, joinDate: today }));
-              setJoinDateText(isoDateToDdMmYyyy(today));
-              return;
-            }
-            const iso = normalizeJoinDateToIso(t);
-            if (iso) {
-              setFormData((c) => ({ ...c, joinDate: iso }));
-              setJoinDateText(isoDateToDdMmYyyy(iso));
-            } else {
-              toast.error('Ngày không hợp lệ. Dùng dd/mm/yyyy (ví dụ 08/04/2026)');
-              setJoinDateText(isoDateToDdMmYyyy(formData.joinDate));
-            }
+          selectedIso={formData.joinDate}
+          inputClassName={inputClassName}
+          placeholder="dd/mm/yyyy"
+          accentClassName="bg-primary text-white"
+          onTextChange={setJoinDateText}
+          onTextBlur={commitJoinDateText}
+          onSelectIso={(nextDate) => {
+            setFormData((current) => ({ ...current, joinDate: nextDate }));
+            setJoinDateText(isoDateToDdMmYyyy(nextDate));
           }}
-          className={inputClassName}
         />
-        <p className="mt-1.5 ml-1 text-xs text-gray-500">
-          Định dạng <span className="font-semibold">dd/mm/yyyy</span> — ngày mặc định theo giờ Việt Nam (UTC+7).
-        </p>
       </div>
 
       <div>
@@ -178,6 +188,38 @@ export default function EmployeeForm({ employee, onSuccess, onCancel }: Employee
             {FACTORIES.map((factory) => (
               <option key={factory} value={factory}>
                 {factory}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <svg
+              className="h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="employee-work-schedule" className="mb-1.5 block text-sm font-semibold text-gray-700">
+          Chế độ làm việc
+        </label>
+        <div className="relative">
+          <select
+            id="employee-work-schedule"
+            name="workSchedule"
+            value={formData.workSchedule}
+            onChange={handleChange}
+            className={`${selectClassName} appearance-none pr-10`}
+          >
+            {WORK_SCHEDULES.map((schedule) => (
+              <option key={schedule.value} value={schedule.value}>
+                {schedule.label}
               </option>
             ))}
           </select>

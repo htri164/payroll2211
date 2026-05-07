@@ -1,9 +1,17 @@
 import { database, isConfigured } from './config';
 import { ref, push, set, get, update, remove } from 'firebase/database';
+import {
+  getStandardWorkingDays,
+  normalizeWorkSchedule,
+  type WorkSchedule,
+} from '@/lib/employees';
 
 export const STANDARD_WORKING_DAYS = 26;
 export const NIGHT_SHIFT_ALLOWANCE = 20_000;
-export const FOOD_ALLOWANCE_PER_WORKING_DAY = 40_000;
+export const FOOD_ALLOWANCE_PER_DAY = 40_000;
+export const FULL_ATTENDANCE_BONUS = 300_000;
+export const HOUSING_ALLOWANCE = 200_000;
+export const HOUSING_ALLOWANCE_MIN_WORKED_DAYS = 20;
 export const MAX_MANUAL_ALLOWANCE_LINES = 20;
 export const MAX_MANUAL_ALLOWANCE_LABEL_LENGTH = 80;
 
@@ -17,8 +25,11 @@ export interface SalaryRecord {
   employeeId: string;
   employeeName: string;
   baseSalary: number;
+  workSchedule?: WorkSchedule;
+  foodAllowanceDays?: number;
   foodAllowance: number;
   standardWorkingDays: number;
+  workingDayRate?: number;
   dayShifts: number;
   nightShifts: number;
   leaveDays: number;
@@ -81,25 +92,40 @@ const sumManualAllowance = (lines: ManualAllowanceLine[]) =>
   lines.reduce((sum, line) => sum + toSafeNumber(line.amount), 0);
 
 export const buildSalaryRecord = (record: SalaryRecord): SalaryRecord => {
-  const standardWorkingDays = toSafeNumber(record.standardWorkingDays) || STANDARD_WORKING_DAYS;
-  const dayShifts = toSafeNumber(record.dayShifts);
-  const nightShifts = toSafeNumber(record.nightShifts);
+  const workSchedule = normalizeWorkSchedule(record.workSchedule);
+  const computedStandardWorkingDays = getStandardWorkingDays(record.month, workSchedule);
+  const standardWorkingDays =
+    toSafeNumber(record.standardWorkingDays) ||
+    computedStandardWorkingDays ||
+    STANDARD_WORKING_DAYS;
   const leaveDays = toSafeNumber(record.leaveDays);
+  const workedDays = Math.max(0, standardWorkingDays - leaveDays);
+  const dayShifts = workedDays;
+  const nightShifts = toSafeNumber(record.nightShifts);
   const advancePayment = toSafeNumber(record.advancePayment);
-  const attendanceBonus = toSafeNumber(record.attendanceBonus);
+  const attendanceBonus = leaveDays === 0 ? FULL_ATTENDANCE_BONUS : 0;
   const otherAllowanceBase =
-    toSafeNumber(record.otherAllowance) ||
-    toSafeNumber(record.additionalFees) + toSafeNumber(record.bonus);
+    workedDays >= HOUSING_ALLOWANCE_MIN_WORKED_DAYS ? HOUSING_ALLOWANCE : 0;
   const manualAllowanceLines = normalizeManualAllowanceLines(record.manualAllowanceLines);
   const manualAllowanceTotal = sumManualAllowance(manualAllowanceLines);
-  const otherDeduction =
-    toSafeNumber(record.otherDeduction) || toSafeNumber(record.deductions);
-  const totalWorkedShifts = dayShifts + nightShifts;
+  const otherDeduction = 0;
+  const workingDayRate =
+    standardWorkingDays > 0
+      ? Math.round(toSafeNumber(record.baseSalary) / standardWorkingDays)
+      : 0;
   const grossWorkSalary =
     standardWorkingDays > 0
-      ? Math.round((toSafeNumber(record.baseSalary) / standardWorkingDays) * totalWorkedShifts)
+      ? Math.round((toSafeNumber(record.baseSalary) / standardWorkingDays) * workedDays)
       : 0;
-  const foodAllowance = totalWorkedShifts * FOOD_ALLOWANCE_PER_WORKING_DAY;
+  const rawFoodAllowanceDays = record.foodAllowanceDays;
+  const foodAllowanceDays =
+    rawFoodAllowanceDays === undefined
+      ? Math.round(toSafeNumber(record.foodAllowance) / FOOD_ALLOWANCE_PER_DAY)
+      : toSafeNumber(rawFoodAllowanceDays);
+  const foodAllowance =
+    rawFoodAllowanceDays === undefined
+      ? toSafeNumber(record.foodAllowance)
+      : foodAllowanceDays * FOOD_ALLOWANCE_PER_DAY;
   const nightAllowance = nightShifts * NIGHT_SHIFT_ALLOWANCE;
   const totalAllowance =
     foodAllowance +
@@ -112,16 +138,19 @@ export const buildSalaryRecord = (record: SalaryRecord): SalaryRecord => {
 
   return {
     ...record,
+    workSchedule,
+    foodAllowanceDays,
     foodAllowance,
     standardWorkingDays,
+    workingDayRate,
     dayShifts,
     nightShifts,
     leaveDays,
     advancePayment,
     attendanceBonus,
     otherAllowance: otherAllowanceBase,
-    manualAllowanceLines,
     manualAllowanceTotal,
+    manualAllowanceLines,
     otherDeduction,
     grossWorkSalary,
     nightAllowance,
@@ -143,8 +172,11 @@ export const addSalaryRecord = async (record: SalaryRecord) => {
       employeeId: normalizedRecord.employeeId,
       employeeName: normalizedRecord.employeeName,
       baseSalary: normalizedRecord.baseSalary,
+      workSchedule: normalizedRecord.workSchedule,
+      foodAllowanceDays: normalizedRecord.foodAllowanceDays ?? 0,
       foodAllowance: normalizedRecord.foodAllowance,
       standardWorkingDays: normalizedRecord.standardWorkingDays,
+      workingDayRate: normalizedRecord.workingDayRate,
       dayShifts: normalizedRecord.dayShifts,
       nightShifts: normalizedRecord.nightShifts,
       leaveDays: normalizedRecord.leaveDays,
@@ -218,6 +250,8 @@ export const updateSalaryRecord = async (id: string, record: Partial<SalaryRecor
       employeeId: '',
       employeeName: '',
       baseSalary: 0,
+      workSchedule: 'sunday-off',
+      foodAllowanceDays: 0,
       foodAllowance: 0,
       standardWorkingDays: STANDARD_WORKING_DAYS,
       dayShifts: 0,
